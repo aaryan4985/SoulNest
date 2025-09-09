@@ -3,25 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from '../utils';
 import Navbar from '../components/Navbar';
-import {
-    Typography,
-    TextField,
-    Button,
-    Box,
-    Grid,
-    CssBaseline,
-    Paper,
-    InputAdornment,
-    IconButton,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel
-} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import PersonIcon from '@mui/icons-material/Person';
+import { Eye, EyeOff, User, Lock } from 'lucide-react';
 
 
 function Login() {
@@ -251,50 +233,14 @@ function Login() {
                                     fullWidth
                                     name="password"
                                     label="Password"
-
-                                name="role"
-                                value={loginInfo.role}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
-                            >
-                                <option value="">Select...</option>
-                                <option value="student">Student</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                autoComplete="username"
-                                autoFocus
-                                value={loginInfo.username}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                            <div className="relative">
-                                <input
-                                    id="password"
-                                    name="password"
                                     type={showPassword ? 'text' : 'password'}
-                                    autoComplete="current-password"
                                     value={loginInfo.password}
                                     onChange={handleChange}
-                                    variant="standard"
                                     sx={{
-                                        '& .MuiInputBase-input': {
-                                            fontSize: '0.85rem',
-                                        },
-                                        '& .MuiInputLabel-root': {
-                                            fontSize: '0.85rem',
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': { borderColor: 'rgba(0, 0, 0, 0.23)' },
+                                            '&:hover fieldset': { borderColor: 'rgba(0, 0, 0, 0.87)' },
+                                            '&.Mui-focused fieldset': { borderColor: 'primary.main' },
                                         },
                                         '& .MuiInput-underline:before': { borderBottomColor: 'rgba(0, 0, 0, 0.42)' },
                                         '& .MuiInput-underline:after': { borderBottomColor: 'primary.main' },
@@ -305,16 +251,37 @@ function Login() {
                                             <InputAdornment position="end">
                                                 <IconButton
                                                     aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
+                                                    onClick={() => setShowPassword(!showPassword)}
                                                     edge="end"
                                                 >
-                                                    {showPassword ? <VisibilityIcon fontSize="small" /> : <VisibilityOffIcon fontSize="small" />}
+                                                    {showPassword ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
                                                 </IconButton>
                                             </InputAdornment>
                                         ),
                                     }}
                                 />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    select
+                                    name="role"
+                                    label="Role"
+                                    value={loginInfo.role}
+                                    onChange={handleChange}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            '& fieldset': { borderColor: 'rgba(0, 0, 0, 0.23)' },
+                                            '&:hover fieldset': { borderColor: 'rgba(0, 0, 0, 0.87)' },
+                                            '&.Mui-focused fieldset': { borderColor: 'primary.main' },
+                                        },
+                                    }}
+                                >
+                                    <MenuItem value="">Select...</MenuItem>
+                                    <MenuItem value="student">Student</MenuItem>
+                                    <MenuItem value="teacher">Teacher</MenuItem>
+                                    <MenuItem value="admin">Admin</MenuItem>
+                                </TextField>
                                 <Box sx={{ display: 'flex', gap: 2, width: '100%', justifyContent: 'center', mt: 8, mb: 8 }}>
                                     <Button
                                         type="submit"
@@ -331,7 +298,7 @@ function Login() {
                 <ToastContainer />
             </Box>
         </ThemeProvider>
-
+    );
 }
 
 export default Login;
