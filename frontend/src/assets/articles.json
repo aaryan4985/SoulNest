@@ -1,0 +1,109 @@
+{
+  "articles": [
+    {
+      "title": "The Science-Backed Ways to Break Out of a Funk",
+      "source": "Harvard Health Publishing",
+      "url": "https://www.health.harvard.edu/mind-and-mood/the-science-backed-ways-to-break-out-of-a-funk",
+      "category": "science-based",
+      "description": "Evidence-based strategies for overcoming low moods and depression"
+    },
+    {
+      "title": "10 Evidence-Based Ways to Become Happier",
+      "source": "Psychology Today",
+      "url": "https://www.psychologytoday.com/us/blog/the-path-passionate-happiness/201001/10-evidence-based-ways-become-happier",
+      "category": "happiness",
+      "description": "Research-backed methods to increase life satisfaction"
+    },
+    {
+      "title": "Mindfulness-Based Stress Reduction: What You Need to Know",
+      "source": "Mayo Clinic",
+      "url": "https://www.mayoclinic.org/tests-procedures/stress-management/in-depth/stress-relief/art-20044456",
+      "category": "mindfulness",
+      "description": "Comprehensive guide to using mindfulness for stress management"
+    },
+    {
+      "title": "The Power of Positive Psychology",
+      "source": "American Psychological Association",
+      "url": "https://www.apa.org/science/about/publications/psychological-science-agenda/2011/01/positive-psychology",
+      "category": "positive-psychology",
+      "description": "Understanding how positive psychology can improve mental health"
+    },
+    {
+      "title": "How Exercise Fights Depression",
+      "source": "Johns Hopkins Medicine",
+      "url": "https://www.hopkinsmedicine.org/health/wellness-and-prevention/mental-health/how-exercise-fights-depression",
+      "category": "exercise",
+      "description": "The biological mechanisms behind exercise as depression treatment"
+    },
+    {
+      "title": "Building Emotional Resilience",
+      "source": "Mental Health America",
+      "url": "https://www.mhanational.org/building-emotional-resilience",
+      "category": "resilience",
+      "description": "Strategies for developing emotional strength and adaptability"
+    },
+    {
+      "title": "The Benefits of Gratitude Practice",
+      "source": "UC Berkeley Greater Good Science Center",
+      "url": "https://greatergood.berkeley.edu/article/item/why_gratitude_is_good",
+      "category": "gratitude",
+      "description": "Scientific research on how gratitude improves well-being"
+    },
+    {
+      "title": "Understanding Cognitive Behavioral Therapy",
+      "source": "National Institute of Mental Health",
+      "url": "https://www.nimh.nih.gov/health/topics/psychotherapies",
+      "category": "therapy",
+      "description": "Comprehensive overview of CBT and other effective therapies"
+    },
+    {
+      "title": "The Role of Sleep in Mental Health",
+      "source": "Sleep Foundation",
+      "url": "https://www.sleepfoundation.org/mental-health",
+      "category": "sleep",
+      "description": "How sleep quality affects mood and cognitive function"
+    },
+    {
+      "title": "Social Connection and Mental Wellness",
+      "source": "Centers for Disease Control and Prevention",
+      "url": "https://www.cdc.gov/emotional-wellbeing/social-connectedness/index.htm",
+      "category": "social-connection",
+      "description": "The importance of relationships for mental health"
+    },
+    {
+      "title": "Nutrition and Mental Health",
+      "source": "Harvard T.H. Chan School of Public Health",
+      "url": "https://www.hsph.harvard.edu/nutritionsource/mental-health/",
+      "category": "nutrition",
+      "description": "How diet impacts mood and cognitive function"
+    },
+    {
+      "title": "Stress Management Techniques That Work",
+      "source": "WebMD",
+      "url": "https://www.webmd.com/balance/stress-management/stress-management",
+      "category": "stress-management",
+      "description": "Proven methods for managing and reducing stress"
+    },
+    {
+      "title": "The Science of Happiness",
+      "source": "Harvard Medical School",
+      "url": "https://www.health.harvard.edu/mind-and-mood/the-science-of-happiness",
+      "category": "happiness",
+      "description": "Research findings on what makes people genuinely happy"
+    },
+    {
+      "title": "Overcoming Seasonal Affective Disorder",
+      "source": "Mayo Clinic",
+      "url": "https://www.mayoclinic.org/diseases-conditions/seasonal-affective-disorder/symptoms-causes/syc-20364651",
+      "category": "seasonal-depression",
+      "description": "Understanding and treating seasonal depression"
+    },
+    {
+      "title": "The Benefits of Journaling for Mental Health",
+      "source": "University of Rochester Medical Center",
+      "url": "https://www.urmc.rochester.edu/encyclopedia/content.aspx?ContentID=4552&ContentTypeID=1",
+      "category": "journaling",
+      "description": "How writing can improve emotional well-being"
+    }
+  ]
+}

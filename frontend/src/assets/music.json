@@ -1,0 +1,164 @@
+{
+    "songs": [
+        {
+            "title": "Here Comes the Sun",
+            "artist": "The Beatles",
+            "mood": "uplifting",
+            "searchQuery": "Here Comes the Sun Beatles",
+            "genre": "Rock",
+            "year": 1969
+        },
+        {
+            "title": "Good as Hell",
+            "artist": "Lizzo",
+            "mood": "empowering",
+            "searchQuery": "Good as Hell Lizzo",
+            "genre": "Pop",
+            "year": 2019
+        },
+        {
+            "title": "Stronger (What Doesn't Kill You)",
+            "artist": "Kelly Clarkson",
+            "mood": "motivational",
+            "searchQuery": "Stronger Kelly Clarkson",
+            "genre": "Pop",
+            "year": 2011
+        },
+        {
+            "title": "Count on Me",
+            "artist": "Bruno Mars",
+            "mood": "supportive",
+            "searchQuery": "Count on Me Bruno Mars",
+            "genre": "Pop",
+            "year": 2010
+        },
+        {
+            "title": "What a Wonderful World",
+            "artist": "Louis Armstrong",
+            "mood": "peaceful",
+            "searchQuery": "What a Wonderful World Louis Armstrong",
+            "genre": "Jazz",
+            "year": 1967
+        },
+        {
+            "title": "Happy",
+            "artist": "Pharrell Williams",
+            "mood": "joyful",
+            "searchQuery": "Happy Pharrell Williams",
+            "genre": "Pop",
+            "year": 2013
+        },
+        {
+            "title": "Three Little Birds",
+            "artist": "Bob Marley",
+            "mood": "calming",
+            "searchQuery": "Three Little Birds Bob Marley",
+            "genre": "Reggae",
+            "year": 1977
+        },
+        {
+            "title": "Roar",
+            "artist": "Katy Perry",
+            "mood": "empowering",
+            "searchQuery": "Roar Katy Perry",
+            "genre": "Pop",
+            "year": 2013
+        },
+        {
+            "title": "Sunflower",
+            "artist": "Post Malone ft. Swae Lee",
+            "mood": "uplifting",
+            "searchQuery": "Sunflower Post Malone",
+            "genre": "Hip-Hop",
+            "year": 2018
+        },
+        {
+            "title": "Can't Stop the Feeling",
+            "artist": "Justin Timberlake",
+            "mood": "energetic",
+            "searchQuery": "Can't Stop the Feeling Justin Timberlake",
+            "genre": "Pop",
+            "year": 2016
+        },
+        {
+            "title": "Don't Stop Believin'",
+            "artist": "Journey",
+            "mood": "hopeful",
+            "searchQuery": "Don't Stop Believin Journey",
+            "genre": "Rock",
+            "year": 1981
+        },
+        {
+            "title": "Beautiful Day",
+            "artist": "U2",
+            "mood": "optimistic",
+            "searchQuery": "Beautiful Day U2",
+            "genre": "Rock",
+            "year": 2000
+        },
+        {
+            "title": "Shake It Off",
+            "artist": "Taylor Swift",
+            "mood": "resilient",
+            "searchQuery": "Shake It Off Taylor Swift",
+            "genre": "Pop",
+            "year": 2014
+        },
+        {
+            "title": "Walking on Sunshine",
+            "artist": "Katrina and the Waves",
+            "mood": "joyful",
+            "searchQuery": "Walking on Sunshine Katrina and the Waves",
+            "genre": "Pop",
+            "year": 1985
+        },
+        {
+            "title": "Good Vibrations",
+            "artist": "The Beach Boys",
+            "mood": "positive",
+            "searchQuery": "Good Vibrations Beach Boys",
+            "genre": "Pop",
+            "year": 1966
+        },
+        {
+            "title": "Lovely Day",
+            "artist": "Bill Withers",
+            "mood": "uplifting",
+            "searchQuery": "Lovely Day Bill Withers",
+            "genre": "Soul",
+            "year": 1977
+        },
+        {
+            "title": "I Can See Clearly Now",
+            "artist": "Johnny Nash",
+            "mood": "optimistic",
+            "searchQuery": "I Can See Clearly Now Johnny Nash",
+            "genre": "Reggae",
+            "year": 1972
+        },
+        {
+            "title": "Fight Song",
+            "artist": "Rachel Platten",
+            "mood": "empowering",
+            "searchQuery": "Fight Song Rachel Platten",
+            "genre": "Pop",
+            "year": 2014
+        },
+        {
+            "title": "Good Morning",
+            "artist": "Max Frost",
+            "mood": "energetic",
+            "searchQuery": "Good Morning Max Frost",
+            "genre": "Alternative",
+            "year": 2018
+        },
+        {
+            "title": "Best Day of My Life",
+            "artist": "American Authors",
+            "mood": "joyful",
+            "searchQuery": "Best Day of My Life American Authors",
+            "genre": "Alternative",
+            "year": 2013
+        }
+    ]
+}

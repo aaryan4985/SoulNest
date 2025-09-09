@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Phone, Mail, User, Award, Clock, Globe, Filter, ChevronDown, Star, X } from 'lucide-react';
-import cityNumbers from '../cityNumbers';
-import specializations from '../specilization';
+import cityNumbers from '../assets/cityNumbers';
+import specializations from '../assets/specilization';
 import ProductExplainerSvg from '../assets/undraw_product-explainer_b7ft.svg';
+import { auth } from '../config/firebase';
 
 const Appointment = () => {
 
@@ -75,7 +76,10 @@ const Appointment = () => {
       const response = await fetch("http://localhost:5000/appointment/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ therapistName: therapist.name })
+        body: JSON.stringify({
+          therapistName: therapist.name,
+          reciever: auth.currentUser.email
+        })
       });
 
       const data = await response.json();
@@ -243,9 +247,9 @@ const Appointment = () => {
                 value={searchParams.city}
                 onChange={(e) => setSearchParams(prev => ({ ...prev, city: e.target.value }))}
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
-                style={{ 
-                  backgroundColor: '#ffffeb', 
-                  borderColor: '#5ea85e', 
+                style={{
+                  backgroundColor: '#ffffeb',
+                  borderColor: '#5ea85e',
                   color: '#000000',
                   focusRingColor: '#5ea85e'
                 }}
@@ -265,9 +269,9 @@ const Appointment = () => {
                 value={searchParams.specialization}
                 onChange={(e) => setSearchParams(prev => ({ ...prev, specialization: e.target.value }))}
                 className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
-                style={{ 
-                  backgroundColor: '#ffffeb', 
-                  borderColor: '#5ea85e', 
+                style={{
+                  backgroundColor: '#ffffeb',
+                  borderColor: '#5ea85e',
                   color: '#000000',
                   focusRingColor: '#5ea85e'
                 }}
@@ -379,9 +383,9 @@ const Appointment = () => {
         {!loading && therapists.length === 0 && !searchParams.city && !error && (
           <div className="text-center py-12">
             <div className="rounded-xl shadow-sm border p-8 max-w-md mx-auto" style={{ backgroundColor: '#ffffeb', borderColor: '#5ea85e' }}>
-              <img 
-                src={ProductExplainerSvg} 
-                alt="Find Your Therapist" 
+              <img
+                src={ProductExplainerSvg}
+                alt="Find Your Therapist"
                 className="w-32 h-32 mx-auto mb-4 object-contain"
               />
               <h3 className="text-lg font-medium mb-2" style={{ color: '#000000' }}>Find Your Therapist</h3>
