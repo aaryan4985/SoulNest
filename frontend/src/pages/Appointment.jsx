@@ -4,6 +4,7 @@ import cityNumbers from '../cityNumbers';
 import specializations from '../specilization';
 
 const Appointment = () => {
+
   const [therapists, setTherapists] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useState({
@@ -17,30 +18,28 @@ const Appointment = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [error, setError] = useState('');
 
-  // Get cities array from the imported object
   const cities = Object.keys(cityNumbers);
 
-  // Fetch therapists from API
   const fetchTherapists = async () => {
     if (!searchParams.city) return;
-    
+
     setLoading(true);
     setError('');
-    
+
     try {
       const cityId = cityNumbers[searchParams.city];
       const params = new URLSearchParams({
         city: cityId,
         page: searchParams.page
       });
-      
+
       if (searchParams.specialization) {
         params.append('specialization', searchParams.specialization);
       }
-      
+
       const response = await fetch(`http://localhost:5000/appointment?${params}`);
       const data = await response.json();
-      
+
       if (data.success) {
         setTherapists(data.data.therapists);
         setTotalCount(data.data.totalCount);
@@ -70,6 +69,26 @@ const Appointment = () => {
     setError('');
   };
 
+  const handleBookAppointment = async (therapist) => {
+    try {
+      const response = await fetch("http://localhost:5000/appointment/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ therapistName: therapist.name })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Appointment booked! Confirmation email sent.");
+      } else {
+        alert("Failed to send email.");
+      }
+    } catch (err) {
+      alert("Network error, please try again.");
+    }
+  };
+
   const TherapistCard = ({ therapist }) => (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 mb-6 overflow-hidden">
       <div className="p-6">
@@ -78,8 +97,8 @@ const Appointment = () => {
           <div className="flex-shrink-0 self-center lg:self-start">
             <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-200 border-4 border-white shadow-md">
               {therapist.imageUrl ? (
-                <img 
-                  src={therapist.imageUrl} 
+                <img
+                  src={therapist.imageUrl}
                   alt={therapist.name}
                   className="w-full h-full object-cover"
                 />
@@ -97,7 +116,7 @@ const Appointment = () => {
               <div className="flex-1">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{therapist.name}</h3>
                 <p className="text-blue-600 font-medium mb-2">{therapist.designation}</p>
-                
+
                 {therapist.about && (
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">{therapist.about}</p>
                 )}
@@ -113,7 +132,7 @@ const Appointment = () => {
                       </div>
                     </div>
                   )}
-                  
+
                   {therapist.experience && (
                     <div className="flex items-start gap-2">
                       <Clock className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
@@ -123,7 +142,7 @@ const Appointment = () => {
                       </div>
                     </div>
                   )}
-                  
+
                   {therapist.location && (
                     <div className="flex items-start gap-2">
                       <MapPin className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
@@ -133,7 +152,7 @@ const Appointment = () => {
                       </div>
                     </div>
                   )}
-                  
+
                   {therapist.languages && (
                     <div className="flex items-start gap-2">
                       <Globe className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" />
@@ -164,10 +183,9 @@ const Appointment = () => {
                 )}
               </div>
 
-              {/* Contact Info */}
               <div className="lg:text-right space-y-3">
                 {therapist.phone && (
-                  <a 
+                  <a
                     href={`tel:${therapist.phone}`}
                     className="flex lg:justify-end items-center gap-2 text-green-600 hover:text-green-700 transition-colors"
                   >
@@ -175,9 +193,9 @@ const Appointment = () => {
                     <span className="text-sm font-medium">{therapist.phone}</span>
                   </a>
                 )}
-                
+
                 {therapist.email && (
-                  <a 
+                  <a
                     href={`mailto:${therapist.email}`}
                     className="flex lg:justify-end items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
                   >
@@ -185,10 +203,14 @@ const Appointment = () => {
                     <span className="text-sm">{therapist.email}</span>
                   </a>
                 )}
-                
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors w-full lg:w-auto">
+
+                <button
+                  onClick={() => handleBookAppointment(therapist)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors w-full lg:w-auto"
+                >
                   Book Appointment
                 </button>
+
               </div>
             </div>
           </div>
@@ -199,7 +221,6 @@ const Appointment = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header Section */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Find Mental Health Professionals</h1>
@@ -207,11 +228,9 @@ const Appointment = () => {
         </div>
       </div>
 
-      {/* Search Section */}
       <div className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col lg:flex-row gap-4">
-            {/* City Search */}
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Select City *
@@ -228,7 +247,6 @@ const Appointment = () => {
               </select>
             </div>
 
-            {/* Specialization Search */}
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Specialization (Optional)
@@ -245,7 +263,6 @@ const Appointment = () => {
               </select>
             </div>
 
-            {/* Search Buttons */}
             <div className="flex gap-3 lg:items-end">
               <button
                 onClick={handleSearch}
@@ -255,7 +272,7 @@ const Appointment = () => {
                 <Search className="w-4 h-4" />
                 Search
               </button>
-              
+
               <button
                 onClick={handleReset}
                 className="border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-lg font-medium transition-colors flex items-center gap-2"
@@ -268,9 +285,7 @@ const Appointment = () => {
         </div>
       </div>
 
-      {/* Results Section */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Results Header */}
         {(therapists.length > 0 || loading) && (
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
             <div>
@@ -286,14 +301,12 @@ const Appointment = () => {
           </div>
         )}
 
-        {/* Error Message */}
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
             {error}
           </div>
         )}
 
-        {/* Loading State */}
         {loading && (
           <div className="space-y-6">
             {[...Array(3)].map((_, i) => (
@@ -316,7 +329,6 @@ const Appointment = () => {
           </div>
         )}
 
-        {/* Therapists List */}
         {!loading && therapists.length > 0 && (
           <div className="space-y-6">
             {therapists.map((therapist, index) => (
@@ -325,7 +337,6 @@ const Appointment = () => {
           </div>
         )}
 
-        {/* No Results */}
         {!loading && therapists.length === 0 && searchParams.city && !error && (
           <div className="text-center py-12">
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 max-w-md mx-auto">
@@ -344,7 +355,6 @@ const Appointment = () => {
           </div>
         )}
 
-        {/* Initial State */}
         {!loading && therapists.length === 0 && !searchParams.city && !error && (
           <div className="text-center py-12">
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 max-w-md mx-auto">
