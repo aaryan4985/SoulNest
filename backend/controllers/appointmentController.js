@@ -162,11 +162,11 @@ exports.getAppointment = async (req, res) => {
 
 exports.bookAppointment = async (req, res) => {
   try {
-    const { therapistName } = req.body;
+    const { therapistName, reciever } = req.body;
 
     await transporter.sendMail({
       from: `"SoulNest" <${process.env.GOOGLE_ACCOUNT}>`,
-      to: "soulnestmail@gmail.com",
+      to: reciever,
       subject: "New Appointment Booking",
       text: `A new appointment has been booked with ${therapistName}`,
     });
