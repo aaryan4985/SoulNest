@@ -1,150 +1,115 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import { handleError, handleSuccess } from '../utils';
-import Navbar from '../components/Navbar';
+import { useState } from "react";
+import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
 
-function Login() {
-    const [loginInfo, setLoginInfo] = useState({
-        username: '',
-        password: '',
-        role: ''
-    });
-    const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/"); // Navigate to home/dashboard on successful login
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setLoginInfo(prev => ({ ...prev, [name]: value }));
-    };
+  const handleGoogle = async () => {
+    setIsLoading(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const { username, password, role } = loginInfo;
-        if (!username || !password || !role) {
-            return handleError('username, password and role are required');
-        }
-        try {
-            const url = `${import.meta.env.VITE_API_URL}/auth/login/${role}`;
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const result = await response.json();
-            const { success, message, jwtToken, name, error } = result;
-            if (success) {
-                handleSuccess(message);
-                localStorage.setItem('token', jwtToken);
-                localStorage.setItem('loggedInUser', name);
-                localStorage.setItem('userRole', role);
-                setTimeout(() => navigate('/dashboard'), 1000);
-            } else if (error) {
-                handleError(error?.details[0].message);
-            } else {
-                handleError(message);
-            }
-        } catch (err) {
-            handleError(err);
-        }
-    };
-
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-blue-50">
-            <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="md:w-1/2 flex items-center justify-center bg-blue-100 p-8">
-                    <img src="/src/assets/login-image.png" alt="Login Visual" className="object-cover w-full h-60 md:h-full rounded-lg" />
-                </div>
-                <div className="md:w-1/2 p-8 flex flex-col justify-center">
-                    <div className="flex justify-center mb-4">
-                        <img src="/src/assets/d-logo.png" alt="Logo" className="w-20 h-20 object-contain" />
-                    </div>
-                    <h1 className="text-2xl font-bold text-center mb-6 font-montserrat">Learning beyond the classroom</h1>
-                    <form onSubmit={handleLogin} className="flex flex-col gap-4 w-full max-w-xs mx-auto">
-                        <div>
-                            <label htmlFor="role" className="block text-sm font-medium text-gray-700">Select Role</label>
-                            <select
-                                id="role"
-                                name="role"
-                                value={loginInfo.role}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
-                            >
-                                <option value="">Select...</option>
-                                <option value="student">Student</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                autoComplete="username"
-                                autoFocus
-                                value={loginInfo.username}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-                            <div className="relative">
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    autoComplete="current-password"
-                                    value={loginInfo.password}
-                                    onChange={handleChange}
-                                    required
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm pr-10"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={handleClickShowPassword}
-                                    className="absolute inset-y-0 right-0 px-2 flex items-center text-gray-500"
-                                    tabIndex={-1}
-                                >
-                                    {showPassword ? 'Hide' : 'Show'}
-                                </button>
-                            </div>
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-600 text-white rounded-md py-2 font-semibold hover:bg-blue-700 transition"
-                        >
-                            Log In
-                        </button>
-                    </form>
-                    <ToastContainer />
-                </div>
-            </div>
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-green-100 p-4">
+      <div className="bg-white p-8 rounded-3xl shadow-soft w-full max-w-md">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-primary mb-2">Login</h1>
+          <p className="text-gray-600">Welcome back, please login to your account</p>
         </div>
-    );
-}
 
-export default Login;
+        {error && (
+          <div className="bg-red-50 text-red-700 p-3 rounded-xl mb-4 text-sm">
+            {error}
+          </div>
+        )}
 
-/* Responsive image style for mobile */
-/*
-.login-image-responsive {
-  object-fit: cover;
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-primary text-white py-3 rounded-xl hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <div className="flex items-center my-6">
+          <div className="flex-1 border-t border-gray-300"></div>
+          <div className="px-3 text-gray-500 text-sm">OR</div>
+          <div className="flex-1 border-t border-gray-300"></div>
+        </div>
+
+        <button
+          onClick={handleGoogle}
+          disabled={isLoading}
+          className="w-full bg-white border border-gray-300 rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google"
+            className="w-5 h-5"
+          />
+          Login with Google
+        </button>
+
+        <p className="text-center text-sm mt-6 text-gray-600">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-primary font-medium hover:underline">
+            Sign Up
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 }
-@media (max-width: 900px) {
-  .login-image-responsive {
-    object-fit: contain !important;
-    background: #fff;
-  }
-}
-*/
