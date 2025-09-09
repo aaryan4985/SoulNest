@@ -1,4 +1,6 @@
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
 
 // Routers
@@ -12,6 +14,12 @@ const resourceRouter = require("./routes/resource");
 const socialRouter = require("./routes/social");
 
 app.use(express.json());
+
+app.use(cors({
+  origin: "*",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type,Authorization"
+}));
 
 app.use("/", landingRouter);
 app.use("/auth", authRouter);
