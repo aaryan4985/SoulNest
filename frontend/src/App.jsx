@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
@@ -9,6 +10,7 @@ import AIChatbot from './pages/AIChatbot';
 import Appointment from './pages/Appointment';
 import Resource from './pages/Resource';
 import Social from './pages/Social';
+import Tos from './pages/Tos';
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/resource" element={<Resource />} />
         <Route path="/social" element={<Social />} />
+        <Route path="/tos" element={<Tos />} />
       </Routes>
     </Router>
   );
