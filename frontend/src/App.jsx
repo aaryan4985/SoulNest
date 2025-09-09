@@ -20,7 +20,12 @@ import CalendarPage from "./pages/CalenderPage";
 import { Navigate } from 'react-router-dom';
 function App() {
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
