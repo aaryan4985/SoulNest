@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useStore } from "../store/userStore";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,9 @@ export default function LoginPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/"); // Navigate to home/dashboard on successful login
+      const user = auth.currentUser;
+      setUser(user);
+      navigate("/tracker"); // Navigate to student dashboard on successful login
     } catch (err) {
       setError(err.message);
     } finally {
@@ -30,7 +34,9 @@ export default function LoginPage() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      navigate("/");
+      const user = auth.currentUser;
+      setUser(user);
+      navigate("/tracker");
     } catch (err) {
       setError(err.message);
     } finally {
