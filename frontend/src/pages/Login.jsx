@@ -23,7 +23,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import PersonIcon from '@mui/icons-material/Person';
 
-const defaultTheme = createTheme();
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({
@@ -31,9 +30,7 @@ function Login() {
         password: '',
         role: ''
     });
-
     const [showPassword, setShowPassword] = useState(false);
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -43,10 +40,6 @@ function Login() {
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
     };
 
     const handleLogin = async (e) => {
@@ -258,6 +251,39 @@ function Login() {
                                     fullWidth
                                     name="password"
                                     label="Password"
+
+                                name="role"
+                                value={loginInfo.role}
+                                onChange={handleChange}
+                                required
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                            >
+                                <option value="">Select...</option>
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+                            <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                autoComplete="username"
+                                autoFocus
+                                value={loginInfo.username}
+                                onChange={handleChange}
+                                required
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                            <div className="relative">
+                                <input
+                                    id="password"
+                                    name="password"
                                     type={showPassword ? 'text' : 'password'}
                                     autoComplete="current-password"
                                     value={loginInfo.password}
@@ -305,7 +331,7 @@ function Login() {
                 <ToastContainer />
             </Box>
         </ThemeProvider>
-    );
+
 }
 
 export default Login;
