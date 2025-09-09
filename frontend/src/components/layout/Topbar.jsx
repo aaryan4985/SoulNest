@@ -12,9 +12,9 @@ export default function Topbar({ user, onSignOut, onToggleSidebar, sidebarOpen }
         {sidebarOpen ? <FiX /> : <FiMenu />}
       </button>
 
-      <div className="flex items-center gap-4 flex-1 justify-end">
+  <div className="flex items-center gap-4 flex-1 justify-end mt-2">
         {/* User info */}
-        <div className="text-right hidden sm:block">
+  <div className="text-right hidden sm:block mt-2">
           <div className="font-semibold">{user?.displayName || user?.email?.split("@")[0]}</div>
           <div className="text-xs text-gray-500">{user?.email}</div>
         </div>
@@ -28,13 +28,13 @@ export default function Topbar({ user, onSignOut, onToggleSidebar, sidebarOpen }
             )}`
           }
           alt="avatar"
-          className="w-10 h-10 rounded-full ring-2 ring-white shadow"
+          className="w-10 h-10 rounded-full ring-2 ring-white shadow mt-2"
         />
 
         {/* Logout */}
         <button
           onClick={onSignOut}
-          className="inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-primary text-white hover:bg-purple-700 transition"
+          className="inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-green-600 text-white hover:bg-red-600 transition mt-2"
         >
           <FiLogOut /> <span className="hidden sm:inline">Sign out</span>
         </button>

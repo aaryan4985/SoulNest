@@ -3,7 +3,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Card from "../components/layout/Card";
 import { motion, AnimatePresence } from "framer-motion";
-import { auth, db } from "../config/firebase";
+import { db } from "../config/firebase";
+import { useStore } from "../store/userStore";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const moodOptions = [
@@ -20,7 +21,7 @@ export default function CalendarCard() {
   const [moods, setMoods] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const user = auth.currentUser;
+  const { user } = useStore();
 
   // Fetch moods from Firestore on mount
   useEffect(() => {
