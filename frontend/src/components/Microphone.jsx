@@ -331,7 +331,7 @@ Provide only the JSON response without any additional text.`;
   };
 
   const getScoreColor = (score) => {
-    if (score >= 80) return '#4CAF50';
+    if (score >= 80) return '#ff3f74';
     if (score >= 60) return '#2196F3';
     if (score >= 40) return '#FF9800';
     return '#f44336';
@@ -409,7 +409,7 @@ Provide only the JSON response without any additional text.`;
         <button
           onClick={startEQAssessment}
           style={{
-            backgroundColor: '#4CAF50',
+            backgroundColor: '#ff3f74',
             color: 'white',
             border: 'none',
             borderRadius: '25px',
@@ -418,10 +418,10 @@ Provide only the JSON response without any additional text.`;
             fontWeight: 'bold',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            boxShadow: '0 4px 12px rgba(76, 175, 80, 0.3)'
+            boxShadow: '0 4px 12px rgba(255, 63, 116, 0.3)'
           }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#45a049'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#4CAF50'}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#e73568'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#ff3f74'}
         >
           Start Assessment
         </button>
@@ -486,7 +486,7 @@ Provide only the JSON response without any additional text.`;
                 width: '60px',
                 height: '60px',
                 borderRadius: '50%',
-                backgroundColor: isListening ? '#ff4444' : '#4CAF50',
+                backgroundColor: isListening ? '#ff4444' : '#ff3f74',
                 border: 'none',
                 color: 'white',
                 fontSize: '24px',
@@ -582,8 +582,8 @@ Provide only the JSON response without any additional text.`;
             <div style={{
               width: '40px',
               height: '40px',
-              border: '3px solid #e8f5e8',
-              borderTop: '3px solid #4CAF50',
+              border: '3px solid #ffe8f2',
+              borderTop: '3px solid #ff3f74',
               borderRadius: '50%',
               margin: '0 auto 12px',
               animation: 'spin 1s linear infinite'
@@ -654,7 +654,7 @@ Provide only the JSON response without any additional text.`;
             onClick={resetAssessment}
             style={{
               width: '100%',
-              backgroundColor: '#4CAF50',
+              backgroundColor: '#ff3f74',
               color: 'white',
               border: 'none',
               borderRadius: '20px',

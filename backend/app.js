@@ -3,7 +3,6 @@ const cors = require("cors");
 
 const app = express();
 
-// Routers
 const landingRouter = require("./routes/landing");
 const authRouter = require("./routes/auth");
 const studentRouter = require("./routes/student");
@@ -12,6 +11,7 @@ const chatbotRouter = require("./routes/chatbot");
 const appointmentRouter = require("./routes/appointment");
 const resourceRouter = require("./routes/resource");
 const socialRouter = require("./routes/social");
+const emotionRouter = require("./routes/emotion")
 
 app.use(express.json());
 
@@ -29,6 +29,7 @@ app.use("/chatbot", chatbotRouter);
 app.use("/appointment", appointmentRouter);
 app.use("/resource", resourceRouter);
 app.use("/social", socialRouter);
+app.use("/emotion", emotionRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
