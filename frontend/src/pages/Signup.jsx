@@ -1,81 +1,92 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import { handleError, handleSuccess } from '../utils';
-import Navbar from '../components/Navbar';
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faLock, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Signup() {
-    const [signupInfo, setSignupInfo] = useState({
-        username: '',
-        password: '',
-        role: ''
-    });
+    const [signupInfo, setSignupInfo] = useState({ role: "", username: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setSignupInfo(prev => ({ ...prev, [name]: value }));
+        setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
     };
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSignup = async (e) => {
+    const handleSignup = (e) => {
         e.preventDefault();
-        const { username, password, role } = signupInfo;
-        if (!username || !password || !role) {
-            return handleError('username, password and role are required');
-        }
-        try {
-            const url = `${import.meta.env.VITE_API_URL}/auth/signup/${role}`;
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const result = await response.json();
-            const { success, message, jwtToken, name, error } = result;
-            if (success) {
-                handleSuccess(message);
-                localStorage.setItem('token', jwtToken);
-                localStorage.setItem('loggedInUser', name);
-                localStorage.setItem('userRole', role);
-                setTimeout(() => navigate('/dashboard'), 1000);
-            } else if (error) {
-                handleError(error?.details[0].message);
-            } else {
-                handleError(message);
-            }
-        } catch (err) {
-            handleError(err);
-        }
+        console.log("Signup info:", signupInfo);
+    };
+
+    const handleGoogleSignup = () => {
+        console.log("Google signup clicked");
+        
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-blue-50">
-            <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="md:w-1/2 flex items-center justify-center bg-blue-100 p-8">
-                    <img src="/src/assets/login-image.png" alt="Signup Visual" className="object-cover w-full h-60 md:h-full rounded-lg" />
+        <div className="min-h-screen flex" style={{ backgroundColor: '#f4f8ff' }}>
+            
+            <div className="w-1/2 flex items-center justify-center p-8">
+                <div className="max-w-lg w-full">
+                    <img
+                        src="/hello3(1).svg"
+                        alt="Signup Illustration"
+                        className="w-full h-auto object-contain opacity-100"
+                    />
                 </div>
-                <div className="md:w-1/2 p-8 flex flex-col justify-center">
-                    <div className="flex justify-center mb-4">
-                        <img src="/src/assets/d-logo.png" alt="Logo" className="w-20 h-20 object-contain" />
-                    </div>
-                    <h1 className="text-2xl font-bold text-center mb-6 font-montserrat">Learning beyond the classroom</h1>
-                    <form onSubmit={handleSignup} className="flex flex-col gap-4 w-full max-w-xs mx-auto">
+            </div>
+
+            
+            <div className="w-1/2 flex items-center justify-center p-8">
+                <div className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md mx-auto">
+                    <div className="w-full space-y-5">
+
+                        <div className="text-center">
+                            <img src="/soulnest_title.svg" alt="Logo" className="inline-block h-28 mx-auto" />
+                            <h2 className="text-2xl font-bold text-gray-800 mt-3">Welcome!</h2>
+                            <p className="text-base text-gray-500">Create your SoulNest account</p>
+                        </div>
+
+                        
+                        <button
+                            onClick={handleGoogleSignup}
+                            className="w-full py-3 px-4 border border-gray-300 rounded-lg font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all shadow-sm flex items-center justify-center space-x-3"
+                        >
+                            <svg className="w-5 h-5" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                            <span>Continue with Google</span>
+                        </button>
+
+                        
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-2 bg-white text-gray-500">Or</span>
+                            </div>
+                        </div>
+
                         <div>
-                            <label htmlFor="role" className="block text-sm font-medium text-gray-700">Select Role</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Select Role</label>
                             <select
                                 id="role"
                                 name="role"
                                 value={signupInfo.role}
                                 onChange={handleChange}
                                 required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
+                                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                                style={{ 
+                                    '--tw-ring-color': '#ff3f7a',
+                                    '--tw-ring-offset-shadow': '0 0 0 0 transparent',
+                                    '--tw-ring-shadow': '0 0 0 2px #ff3f7a'
+                                }}
                             >
                                 <option value="">Select...</option>
                                 <option value="student">Student</option>
@@ -83,51 +94,77 @@ function Signup() {
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
+
                         <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                autoComplete="username"
-                                autoFocus
-                                value={signupInfo.username}
-                                onChange={handleChange}
-                                required
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
                             <div className="relative">
+                                <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                                    <FontAwesomeIcon icon={faUser} />
+                                </span>
+                                <input
+                                    id="username"
+                                    name="username"
+                                    type="text"
+                                    value={signupInfo.username}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <div className="relative">
+                                <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                                    <FontAwesomeIcon icon={faLock} />
+                                </span>
                                 <input
                                     id="password"
                                     name="password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    autoComplete="current-password"
+                                    type={showPassword ? "text" : "password"}
                                     value={signupInfo.password}
                                     onChange={handleChange}
                                     required
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm pr-10"
+                                    className="w-full border border-gray-300 rounded-lg pl-10 pr-10 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
                                 />
                                 <button
                                     type="button"
                                     onClick={handleClickShowPassword}
-                                    className="absolute inset-y-0 right-0 px-2 flex items-center text-gray-500"
-                                    tabIndex={-1}
+                                    className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
                                 >
-                                    {showPassword ? 'Hide' : 'Show'}
+                                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                                 </button>
                             </div>
                         </div>
+
                         <button
-                            type="submit"
-                            className="w-full bg-blue-600 text-white rounded-md py-2 font-semibold hover:bg-blue-700 transition"
+                            onClick={handleSignup}
+                            className="w-full py-2 rounded-lg font-semibold text-white transition-all shadow-md hover:shadow-lg transform hover:scale-105"
+                            style={{ 
+                                backgroundColor: '#ff3f7a'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = '#e6356d';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = '#ff3f7a';
+                            }}
                         >
                             Sign Up
                         </button>
-                    </form>
-                    <ToastContainer />
+
+                        <p className="text-center text-sm text-gray-600">
+                            Already have an account?{" "}
+                            <Link 
+                                to="/login" 
+                                className="font-semibold hover:underline transition-colors"
+                                style={{ color: '#ff3f7a' }}
+                            >
+                                Login
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,16 +172,3 @@ function Signup() {
 }
 
 export default Signup;
-
-/* Responsive image style for mobile */
-/*
-.login-image-responsive {
-  object-fit: cover;
-}
-@media (max-width: 900px) {
-  .login-image-responsive {
-    object-fit: contain !important;
-    background: #fff;
-  }
-}
-*/
