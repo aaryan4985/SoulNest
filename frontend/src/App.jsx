@@ -17,6 +17,7 @@ import Appointment from "./pages/Appointment";
 import Resource from "./pages/Resource";
 import Social from "./pages/Social";
 import Tos from "./pages/Tos";
+import MentalHealthSurvey from "./pages/form";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import TrackerPage from "./pages/Trackerpage";
 import GalleryPage from "./pages/GalleryPage";
@@ -65,6 +66,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/survey" element={<MentalHealthSurvey />} />
             <Route
               path="/student/dashboard"
               element={
@@ -169,7 +171,8 @@ function App() {
                 </DashboardLayout>
               }
             />
-            <Route path="*" element={<Navigate to="/tracker" replace />} />
+            <Route path="/survey" element={<MentalHealthSurvey />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       )}
