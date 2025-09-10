@@ -25,6 +25,8 @@ import BotPage from "./pages/BotPage";
 import ChatPage from "./pages/ChatPage";
 import CalendarPage from "./pages/CalenderPage";
 import ContentPage from "./pages/ContentPage";
+import AdminChat from "./pages/AdminChat";
+import ClientChat from "./pages/ClientChat";
 
 function App() {
   const location = useLocation();
@@ -80,6 +82,14 @@ function App() {
               element={
                 <DashboardLayout>
                   <AdminDashboard />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/admin/chat"
+              element={
+                <DashboardLayout>
+                  <AdminChat />
                 </DashboardLayout>
               }
             />
@@ -152,6 +162,14 @@ function App() {
               element={
                 <DashboardLayout>
                   <ChatPage />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/client/chat"
+              element={
+                <DashboardLayout>
+                  <ClientChat />
                 </DashboardLayout>
               }
             />

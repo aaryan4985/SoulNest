@@ -7,29 +7,37 @@ const landingRouter = require("./routes/landing");
 const authRouter = require("./routes/auth");
 const studentRouter = require("./routes/student");
 const adminRouter = require("./routes/admin");
+const adminChatRouter = require("./routes/adminChat");
+const clientChatRouter = require("./routes/clientChat");
 const chatbotRouter = require("./routes/chatbot");
 const appointmentRouter = require("./routes/appointment");
 const resourceRouter = require("./routes/resource");
 const socialRouter = require("./routes/social");
-const emotionRouter = require("./routes/emotion")
+const emotionRouter = require("./routes/emotion");
+const sosRouter = require("./routes/sosRoutes");
 
 app.use(express.json());
 
-app.use(cors({
-  origin: "*",
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type,Authorization"
-}));
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 
 app.use("/", landingRouter);
 app.use("/auth", authRouter);
 app.use("/student", studentRouter);
 app.use("/admin", adminRouter);
 app.use("/chatbot", chatbotRouter);
+app.use("/admin/chat", adminChatRouter);
+app.use("/client/chat", clientChatRouter);
 app.use("/appointment", appointmentRouter);
 app.use("/resource", resourceRouter);
 app.use("/social", socialRouter);
 app.use("/emotion", emotionRouter);
+app.use("/sos", sosRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

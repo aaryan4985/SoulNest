@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
-  Users, 
-  TrendingUp, 
-  Heart, 
-  Brain, 
-  AlertTriangle, 
-  Calendar,
-  BarChart3, 
-  Activity,
-  Bell,
-  Search,
+  Search, 
+  Bell, 
   Settings,
   Filter,
   Download,
   CheckCircle,
-  UserCheck,
-  Clock,
   Shield,
+  Clock,
   BookOpen,
-  Smile
+  UserCheck,
+  Users,
+  Activity,
+  AlertTriangle
 } from 'lucide-react';
 import ProductExplainerSvg from '../assets/undraw_product-explainer_b7ft.svg';
-import SoulNestLogo from '../assets/SOULNEST.svg';
+import SidebarAdmin from '../components/layout/SidebarAdmin';
+import SOSAlerts from '../components/SOSAlerts';
 
 const AdminDashboard = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('This month');
@@ -74,7 +69,7 @@ const AdminDashboard = () => {
   const StatCard = ({ title, value, subtitle, icon: Icon, growth, status }) => (
     <div 
       className="rounded-xl p-6 shadow-sm border transition-all hover:shadow-md"
-      style={{ backgroundColor: '#ffffeb', borderColor: '#5ea85e' }}
+      style={{ backgroundColor: 'white', borderColor: '#ff3f74' }}
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -90,14 +85,14 @@ const AdminDashboard = () => {
             </p>
           )}
           {growth && (
-            <p className="text-sm font-medium mt-2" style={{ color: '#5ea85e' }}>
+            <p className="text-sm font-medium mt-2" style={{ color: '#ff3f74' }}>
               {growth} since last month
             </p>
           )}
           {status && (
             <div className="flex items-center gap-2 mt-2">
-              <CheckCircle className="w-4 h-4" style={{ color: '#5ea85e' }} />
-              <span className="text-sm font-medium" style={{ color: '#5ea85e' }}>
+              <CheckCircle className="w-4 h-4" style={{ color: '#ff3f74' }} />
+              <span className="text-sm font-medium" style={{ color: '#ff3f74' }}>
                 {status}
               </span>
             </div>
@@ -106,9 +101,9 @@ const AdminDashboard = () => {
         {Icon && (
           <div 
             className="p-3 rounded-lg"
-            style={{ backgroundColor: '#5ea85e' }}
+            style={{ backgroundColor: '#ff3f74' }}
           >
-            <Icon className="w-6 h-6" style={{ color: '#ffffeb' }} />
+            <Icon className="w-6 h-6" style={{ color: 'white' }} />
           </div>
         )}
       </div>
@@ -118,7 +113,7 @@ const AdminDashboard = () => {
   const ChartCard = ({ title, children, className = "" }) => (
     <div 
       className={`rounded-xl p-6 shadow-sm border ${className}`}
-      style={{ backgroundColor: '#ffffeb', borderColor: '#5ea85e' }}
+      style={{ backgroundColor: 'white', borderColor: '#ff3f74' }}
     >
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold" style={{ color: '#000000' }}>
@@ -127,13 +122,13 @@ const AdminDashboard = () => {
         <div className="flex items-center gap-2">
           <button 
             className="p-2 rounded-lg border transition-colors hover:opacity-75"
-            style={{ borderColor: '#5ea85e', color: '#5ea85e' }}
+            style={{ borderColor: '#ff3f74', color: '#ff3f74' }}
           >
             <Filter className="w-4 h-4" />
           </button>
           <button 
             className="p-2 rounded-lg border transition-colors hover:opacity-75"
-            style={{ borderColor: '#5ea85e', color: '#5ea85e' }}
+            style={{ borderColor: '#ff3f74', color: '#ff3f74' }}
           >
             <Download className="w-4 h-4" />
           </button>
@@ -153,14 +148,14 @@ const AdminDashboard = () => {
                 className="w-6 rounded-t transition-all hover:opacity-75"
                 style={{ 
                   height: `${(item.sessions / 100) * 100}%`, 
-                  backgroundColor: '#5ea85e'
+                  backgroundColor: '#ff3f74'
                 }}
               />
               <div 
                 className="w-6 rounded-t transition-all hover:opacity-75"
                 style={{ 
                   height: `${(item.requests / 100) * 100}%`, 
-                  backgroundColor: '#8bc9a3'
+                  backgroundColor: '#ff8fab'
                 }}
               />
             </div>
@@ -172,11 +167,11 @@ const AdminDashboard = () => {
       </div>
       <div className="flex justify-center gap-6 text-sm">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#5ea85e' }}></div>
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#ff3f74' }}></div>
           <span style={{ color: '#000000', opacity: 0.7 }}>Sessions</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#8bc9a3' }}></div>
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#ff8fab' }}></div>
           <span style={{ color: '#000000', opacity: 0.7 }}>Support Requests</span>
         </div>
       </div>
@@ -196,8 +191,8 @@ const AdminDashboard = () => {
             <stop offset="100%" style={{ stopColor: '#4ecdc4', stopOpacity: 0 }} />
           </linearGradient>
           <linearGradient id="stressGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#5ea85e', stopOpacity: 0.3 }} />
-            <stop offset="100%" style={{ stopColor: '#5ea85e', stopOpacity: 0 }} />
+            <stop offset="0%" style={{ stopColor: '#ff3f74', stopOpacity: 0.3 }} />
+            <stop offset="100%" style={{ stopColor: '#ff3f74', stopOpacity: 0 }} />
           </linearGradient>
         </defs>
         
@@ -222,7 +217,7 @@ const AdminDashboard = () => {
         {/* Stress trend line */}
         <path
           d="M 50 150 L 150 130 L 250 110 L 350 100 L 450 120 L 550 140"
-          stroke="#5ea85e"
+          stroke="#ff3f74"
           strokeWidth="3"
           fill="none"
           className="drop-shadow-sm"
@@ -247,7 +242,7 @@ const AdminDashboard = () => {
           <span style={{ color: '#000000', opacity: 0.7 }}>Depression</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#5ea85e' }}></div>
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#ff3f74' }}></div>
           <span style={{ color: '#000000', opacity: 0.7 }}>Academic Stress</span>
         </div>
       </div>
@@ -285,19 +280,19 @@ const AdminDashboard = () => {
       <svg className="w-full h-full" viewBox="0 0 400 200">
         <defs>
           <linearGradient id="sessionsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#5ea85e', stopOpacity: 0.3 }} />
-            <stop offset="100%" style={{ stopColor: '#5ea85e', stopOpacity: 0 }} />
+            <stop offset="0%" style={{ stopColor: '#ff3f74', stopOpacity: 0.3 }} />
+            <stop offset="100%" style={{ stopColor: '#ff3f74', stopOpacity: 0 }} />
           </linearGradient>
           <linearGradient id="requestsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#60a5fa', stopOpacity: 0.3 }} />
-            <stop offset="100%" style={{ stopColor: '#60a5fa', stopOpacity: 0 }} />
+            <stop offset="0%" style={{ stopColor: '#ff8fab', stopOpacity: 0.3 }} />
+            <stop offset="100%" style={{ stopColor: '#ff8fab', stopOpacity: 0 }} />
           </linearGradient>
         </defs>
         
         {/* Sessions trend line */}
         <path
           d="M 20 120 Q 80 80 140 100 Q 200 60 260 80 Q 320 40 380 60"
-          stroke="#5ea85e"
+          stroke="#ff3f74"
           strokeWidth="3"
           fill="none"
           className="drop-shadow-sm"
@@ -306,7 +301,7 @@ const AdminDashboard = () => {
         {/* Support requests trend line */}
         <path
           d="M 20 140 Q 80 120 140 130 Q 200 100 260 120 Q 320 80 380 100"
-          stroke="#60a5fa"
+          stroke="#ff8fab"
           strokeWidth="3"
           fill="none"
           className="drop-shadow-sm"
@@ -333,11 +328,11 @@ const AdminDashboard = () => {
       {/* Legend */}
       <div className="flex justify-center gap-6 mt-4 text-sm">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#5ea85e' }}></div>
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#ff3f74' }}></div>
           <span style={{ color: '#000000', opacity: 0.7 }}>Completed Sessions</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#60a5fa' }}></div>
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: '#ff8fab' }}></div>
           <span style={{ color: '#000000', opacity: 0.7 }}>Help Requests</span>
         </div>
       </div>
@@ -345,191 +340,192 @@ const AdminDashboard = () => {
   );
 
   return (
-    <div className="min-h-screen p-6" style={{ backgroundColor: '#ffffeb' }}>
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
-        <div>
-          <img 
-            src={SoulNestLogo} 
-            alt="SoulNest" 
-            className="h-16 mb-5"
+    <div className="flex min-h-screen" style={{ backgroundColor: '#f4f8ff' }}>
+      <div className="flex-1 flex flex-col p-6">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
+          <div className="ml-20">
+            <h1 className="text-3xl font-bold" style={{ color: '#ff3f74' }}>
+              SoulNest Dashboard
+            </h1>
+            <p className="text-sm mt-1" style={{ color: '#000000', opacity: 0.7 }}>
+              Mental Health Support Analytics for College Students
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-4 mt-4 md:mt-0">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4" style={{ color: '#000000', opacity: 0.4 }} />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2"
+                style={{ 
+                  backgroundColor: 'white', 
+                  borderColor: '#ff3f74', 
+                  color: '#000000'
+                }}
+              />
+            </div>
+            <button 
+              className="p-2 rounded-lg border transition-colors hover:opacity-75"
+              style={{ borderColor: '#ff3f74', color: '#ff3f74' }}
+            >
+              <Bell className="w-5 h-5" />
+            </button>
+            <button 
+              className="p-2 rounded-lg border transition-colors hover:opacity-75"
+              style={{ borderColor: '#ff3f74', color: '#ff3f74' }}
+            >
+              <Settings className="w-5 h-5" />
+            </button>
+            <div 
+              className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
+              style={{ backgroundColor: '#ff3f74' }}
+            >
+              AP
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <StatCard
+            title="Total Students"
+            value={stats.totalStudents}
+            icon={Users}
           />
-          <h1 className="text-3xl font-bold" style={{ color: '#000000' }}>
-            SoulNest Dashboard
-          </h1>
-          <p className="text-sm mt-1" style={{ color: '#000000', opacity: 0.7 }}>
-            Mental Health Support Analytics for College Students
-          </p>
+          <StatCard
+            title="Students with Anxiety"
+            value={stats.studentsWithAnxiety}
+            subtitle={stats.anxietyPercentage}
+            icon={AlertTriangle}
+          />
+          <StatCard
+            title="Active Sessions"
+            value={stats.activeSessions}
+            growth={stats.sessionGrowth}
+            icon={Activity}
+          />
+          <StatCard
+            title="Success Rate"
+            value={stats.successRate}
+            status="Above target"
+            icon={CheckCircle}
+          />
         </div>
-        
-        <div className="flex items-center gap-4 mt-4 md:mt-0">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4" style={{ color: '#000000', opacity: 0.4 }} />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2"
-              style={{ 
-                backgroundColor: '#ffffeb', 
-                borderColor: '#5ea85e', 
-                color: '#000000',
-                focusRingColor: '#5ea85e'
-              }}
-            />
-          </div>
-          <button 
-            className="p-2 rounded-lg border transition-colors hover:opacity-75"
-            style={{ borderColor: '#5ea85e', color: '#5ea85e' }}
-          >
-            <Bell className="w-5 h-5" />
-          </button>
-          <button 
-            className="p-2 rounded-lg border transition-colors hover:opacity-75"
-            style={{ borderColor: '#5ea85e', color: '#5ea85e' }}
-          >
-            <Settings className="w-5 h-5" />
-          </button>
-          <div 
-            className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
-            style={{ backgroundColor: '#5ea85e' }}
-          >
-            AP
-          </div>
+
+        {/* SOS Alerts Section */}
+        <div className="mb-8">
+          <SOSAlerts />
         </div>
-      </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <StatCard
-          title="Total Students"
-          value={stats.totalStudents}
-          icon={Users}
-        />
-        <StatCard
-          title="Students with Anxiety"
-          value={stats.studentsWithAnxiety}
-          subtitle={stats.anxietyPercentage}
-          icon={AlertTriangle}
-        />
-        <StatCard
-          title="Active Sessions"
-          value={stats.activeSessions}
-          growth={stats.sessionGrowth}
-          icon={Activity}
-        />
-        <StatCard
-          title="Success Rate"
-          value={stats.successRate}
-          status="Above target"
-          icon={CheckCircle}
-        />
-      </div>
-
-      {/* Mental Health Overview with SVG */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-2">
-          <div 
-            className="rounded-xl p-6 shadow-sm border"
-            style={{ backgroundColor: '#ffffeb', borderColor: '#5ea85e' }}
-          >
-            <h3 className="text-lg font-semibold mb-4" style={{ color: '#000000' }}>
-              Mental Health Crisis Overview
-            </h3>
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Depression Cases</span>
-                  <span className="font-semibold" style={{ color: '#000000' }}>{stats.studentsWithDepression}</span>
+        {/* Mental Health Overview with SVG */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="lg:col-span-2">
+            <div 
+              className="rounded-xl p-6 shadow-sm border"
+              style={{ backgroundColor: 'white', borderColor: '#ff3f74' }}
+            >
+              <h3 className="text-lg font-semibold mb-4" style={{ color: '#000000' }}>
+                Mental Health Crisis Overview
+              </h3>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Depression Cases</span>
+                    <span className="font-semibold" style={{ color: '#000000' }}>{stats.studentsWithDepression}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Avg Response Time</span>
+                    <span className="font-semibold" style={{ color: '#ff3f74' }}>{stats.avgResponseTime}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Rural Colleges</span>
+                    <span className="font-semibold" style={{ color: '#000000' }}>{stats.ruralColleges}</span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Avg Response Time</span>
-                  <span className="font-semibold" style={{ color: '#5ea85e' }}>{stats.avgResponseTime}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Rural Colleges</span>
-                  <span className="font-semibold" style={{ color: '#000000' }}>{stats.ruralColleges}</span>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Support Requests</span>
-                  <span className="font-semibold" style={{ color: '#000000' }}>{stats.supportRequests}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Completed Sessions</span>
-                  <span className="font-semibold" style={{ color: '#5ea85e' }}>{stats.completedSessions}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Urban Colleges</span>
-                  <span className="font-semibold" style={{ color: '#000000' }}>{stats.urbanColleges}</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Support Requests</span>
+                    <span className="font-semibold" style={{ color: '#000000' }}>{stats.supportRequests}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Completed Sessions</span>
+                    <span className="font-semibold" style={{ color: '#ff3f74' }}>{stats.completedSessions}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>Urban Colleges</span>
+                    <span className="font-semibold" style={{ color: '#000000' }}>{stats.urbanColleges}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          
+          <div 
+            className="rounded-xl p-6 shadow-sm border flex flex-col items-center justify-center text-center"
+            style={{ backgroundColor: 'white', borderColor: '#ff3f74' }}
+          >
+            <img 
+              src={ProductExplainerSvg} 
+              alt="Mental Health Support" 
+              className="w-32 h-32 mb-4 object-contain"
+            />
+            <h4 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>
+              Bridging the Gap
+            </h4>
+            <p className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>
+              Providing accessible mental health support to college students across rural and urban institutions
+            </p>
+          </div>
         </div>
-        
-        <div 
-          className="rounded-xl p-6 shadow-sm border flex flex-col items-center justify-center text-center"
-          style={{ backgroundColor: '#ffffeb', borderColor: '#5ea85e' }}
-        >
-          <img 
-            src={ProductExplainerSvg} 
-            alt="Mental Health Support" 
-            className="w-32 h-32 mb-4 object-contain"
+
+        {/* Secondary Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <StatCard
+            title="Pending Consultations"
+            value={stats.supportRequests}
+            icon={Clock}
           />
-          <h4 className="text-lg font-semibold mb-2" style={{ color: '#000000' }}>
-            Bridging the Gap
-          </h4>
-          <p className="text-sm" style={{ color: '#000000', opacity: 0.7 }}>
-            Providing accessible mental health support to college students across rural and urban institutions
-          </p>
+          <StatCard
+            title="Therapists Online"
+            value="127"
+            icon={UserCheck}
+          />
+          <StatCard
+            title="Crisis Interventions"
+            value="23"
+            icon={Shield}
+          />
+          <StatCard
+            title="Educational Resources"
+            value="1,840"
+            icon={BookOpen}
+          />
         </div>
-      </div>
 
-      {/* Secondary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <StatCard
-          title="Pending Consultations"
-          value={stats.supportRequests}
-          icon={Clock}
-        />
-        <StatCard
-          title="Therapists Online"
-          value="127"
-          icon={UserCheck}
-        />
-        <StatCard
-          title="Crisis Interventions"
-          value="23"
-          icon={Shield}
-        />
-        <StatCard
-          title="Educational Resources"
-          value="1,840"
-          icon={BookOpen}
-        />
-      </div>
+        {/* Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <ChartCard title="Mental Health Trends (6 Months)">
+            <MentalHealthTrendChart />
+          </ChartCard>
+          
+          <ChartCard title="Weekly Activity">
+            <WeeklyChart />
+          </ChartCard>
+        </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <ChartCard title="Mental Health Trends (6 Months)">
-          <MentalHealthTrendChart />
-        </ChartCard>
-        
-        <ChartCard title="Weekly Activity">
-          <WeeklyChart />
-        </ChartCard>
-      </div>
-
-      {/* Additional Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ChartCard title="Support Metrics Overview">
-          <TrendChart />
-        </ChartCard>
-        
-        <ChartCard title="Mental Health Issues Distribution">
-          <IssueDistributionChart />
-        </ChartCard>
+        {/* Additional Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ChartCard title="Support Metrics Overview">
+            <TrendChart />
+          </ChartCard>
+          
+          <ChartCard title="Mental Health Issues Distribution">
+            <IssueDistributionChart />
+          </ChartCard>
+        </div>
       </div>
     </div>
   );

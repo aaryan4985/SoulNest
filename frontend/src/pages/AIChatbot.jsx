@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   Send,
   MessageCircle,
-  Brain,
   AlertTriangle,
   Smile,
   Frown,
@@ -12,6 +11,7 @@ import {
   Clock,
   User
 } from "lucide-react";
+import MockAvatar from "../assets/mock_avatar.svg";
 
 const AIChatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -248,8 +248,8 @@ Respond as a caring friend who understands student challenges and mental health 
       {/* WhatsApp-like Header */}
       <div className="flex items-center justify-between p-4 shadow-md" style={{ backgroundColor: '#ff3f74' }}>
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full flex items-center justify-center text-white" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
-            <Brain className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}>
+            <img src={MockAvatar} alt="AI Therapist" className="w-8 h-8 rounded-full" />
           </div>
           <div>
             <h1 className="text-white font-semibold text-xl">SoulNest AI Therapist</h1>
@@ -292,7 +292,7 @@ Respond as a caring friend who understands student challenges and mental health 
 
                   {/* Message Info */}
                   <div className={`flex items-center justify-between mt-2 text-sm ${
-                    message.sender === "user" ? "text-white/70" : "text-gray-500"
+                    message.sender === "user" ? "text-white/90" : "text-gray-500"
                   }`}>
                     <span>
                       {message.timestamp.toLocaleTimeString([], {
@@ -387,7 +387,7 @@ Respond as a caring friend who understands student challenges and mental health 
               <Send className="w-5 h-5" />
             </button>
           </div>
-
+m
           {/* Status text */}
           <div className="flex items-center justify-center mt-2">
             <p className="text-sm text-gray-400 font-medium">

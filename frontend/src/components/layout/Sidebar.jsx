@@ -1,14 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { FiHeart, FiImage, FiMessageCircle, FiCalendar, FiClock, FiClipboard, FiBookOpen, FiLogOut, FiX } from "react-icons/fi";
+import { FiHeart, FiImage, FiMessageCircle, FiCalendar, FiClock, FiClipboard, FiBookOpen, FiLogOut, FiX, FiMessageSquare } from "react-icons/fi";
 import SoulNestLogo from '../../assets/SOULNEST.svg';
 
 const navItems = [
   { to: "/tracker", label: "Happiness Tracker", icon: FiHeart },
-  { to: "/gallery", label: "Happiness Gallery", icon: FiImage },
   { to: "/chatbot", label: "AI Therapist", icon: FiMessageCircle },
+  { to: "/client/chat", label: "Peer to Peer Chat", icon: FiMessageSquare },
   { to: "/appointment", label: "Book Appointment", icon: FiCalendar },
   { to: "/calendar", label: "Calendar", icon: FiClock },
-  { to: "/tos", label: "Psychological Assessment", icon: FiClipboard },
+  { to: "/tos", label: "Wellness Assessment", icon: FiClipboard },
+  { to: "/gallery", label: "Happiness Gallery", icon: FiImage },
   { to: "/contentpage", label: "Resource Hub", icon: FiBookOpen },
 ];
 
