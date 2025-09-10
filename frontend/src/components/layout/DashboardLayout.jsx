@@ -63,10 +63,10 @@ export default function DashboardLayout({ children }) {
       {/* Fixed SOS Button - Bottom Right */}
       <button
         onClick={() => navigate("/sos")}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full text-white font-bold text-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-50 flex items-center justify-center border-4 border-white"
+        className="fixed bottom-6 right-6 w-20 h-20 rounded-full text-white font-bold text-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 z-50 flex items-center justify-center border-4 border-white"
         style={{ 
           backgroundColor: '#ef4444',
-          boxShadow: '0 0 0 6px #ef4444, 0 4px 20px rgba(0,0,0,0.3)'
+          boxShadow: '0 0 0 6px #ef4444, 0 8px 32px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.6)'
         }}
         aria-label="Emergency SOS"
         title="Emergency SOS"

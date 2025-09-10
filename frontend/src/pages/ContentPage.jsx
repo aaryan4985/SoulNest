@@ -14,8 +14,8 @@ const ContentPage = () => {
 
     const VideoCard = ({ video }) => (
         <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
-            <div className="aspect-video bg-gradient-to-br from-[#5ea85e]/10 to-[#5ea85e]/5 rounded-xl mb-4 flex items-center justify-center group-hover:from-[#5ea85e]/20 group-hover:to-[#5ea85e]/10 transition-all duration-300">
-                <Play className="w-12 h-12 text-[#5ea85e] group-hover:scale-110 transition-transform duration-300" />
+            <div className="aspect-video bg-gradient-to-br from-[#ff3f74]/10 to-[#ff3f74]/5 rounded-xl mb-4 flex items-center justify-center group-hover:from-[#ff3f74]/20 group-hover:to-[#ff3f74]/10 transition-all duration-300">
+                <Play className="w-12 h-12 text-[#ff3f74] group-hover:scale-110 transition-transform duration-300" />
             </div>
             <h3 className="font-semibold text-[#000000] mb-2 line-clamp-2">{video.title}</h3>
             <p className="text-[#000000]/60 text-sm mb-4">{video.channel}</p>
@@ -23,7 +23,7 @@ const ContentPage = () => {
                 href={`https://www.youtube.com/watch?v=${video.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#5ea85e] text-white py-2 px-4 rounded-xl hover:bg-[#4a944a] transition-colors duration-300 flex items-center justify-center gap-2 no-underline"
+                className="w-full bg-[#ff3f74] text-white py-2 px-4 rounded-xl hover:bg-[#e73568] transition-colors duration-300 flex items-center justify-center gap-2 no-underline"
             >
                 <Play className="w-4 h-4" />
                 Watch Now
@@ -33,7 +33,7 @@ const ContentPage = () => {
 
     const ArticleCard = ({ article }) => (
         <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-[#5ea85e] to-[#4a944a] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="w-12 h-12 bg-gradient-to-br from-[#ff3f74] to-[#e73568] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <BookOpen className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-semibold text-[#000000] mb-2 line-clamp-2">{article.title}</h3>
@@ -42,7 +42,7 @@ const ContentPage = () => {
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#5ea85e] text-white py-2 px-4 rounded-xl hover:bg-[#4a944a] transition-colors duration-300 flex items-center justify-center gap-2 no-underline"
+                className="w-full bg-[#ff3f74] text-white py-2 px-4 rounded-xl hover:bg-[#e73568] transition-colors duration-300 flex items-center justify-center gap-2 no-underline"
             >
                 <ExternalLink className="w-4 h-4" />
                 Read Article
@@ -66,7 +66,7 @@ const ContentPage = () => {
                 resilient: "from-purple-400/20 to-blue-400/20",
                 positive: "from-green-400/20 to-cyan-400/20"
             };
-            return colors[mood] || "from-[#5ea85e]/20 to-[#4a944a]/20";
+            return colors[mood] || "from-[#ff3f74]/20 to-[#e73568]/20";
         };
 
         return (
@@ -76,12 +76,12 @@ const ContentPage = () => {
                         song.mood
                     )} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
                 >
-                    <Music className="w-6 h-6 text-[#5ea85e]" />
+                    <Music className="w-6 h-6 text-[#ff3f74]" />
                 </div>
                 <h3 className="font-semibold text-[#000000] mb-1">{song.title}</h3>
                 <p className="text-[#000000]/60 text-sm mb-2">{song.artist}</p>
                 <div className="flex items-center justify-between mb-4">
-                    <span className="inline-block bg-[#5ea85e]/10 text-[#5ea85e] px-3 py-1 rounded-full text-xs font-medium capitalize">
+                    <span className="inline-block bg-[#ff3f74]/10 text-[#ff3f74] px-3 py-1 rounded-full text-xs font-medium capitalize">
                         {song.mood}
                     </span>
                 </div>
@@ -90,7 +90,7 @@ const ContentPage = () => {
                         href={`https://music.youtube.com/search?q=${encodeURIComponent(song.searchQuery)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 bg-[#5ea85e] text-white py-2 px-3 rounded-lg hover:bg-[#4a944a] transition-colors duration-300 flex items-center justify-center gap-1 no-underline text-sm"
+                        className="flex-1 bg-[#ff3f74] text-white py-2 px-3 rounded-lg hover:bg-[#e73568] transition-colors duration-300 flex items-center justify-center gap-1 no-underline text-sm"
                     >
                         <Music className="w-3 h-3" />
                         YT Music
@@ -110,9 +110,9 @@ const ContentPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#ffffeb]">
+        <div className="min-h-screen bg-[#f4f8ff]">
             {/* Header Section */}
-            <div className="bg-gradient-to-br from-[#5ea85e] to-[#4a944a] py-20">
+            <div className="bg-gradient-to-br from-[#ff3f74] to-[#e73568] py-20">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="text-center space-y-6">
                         <div className="flex items-center justify-center gap-3 mb-4">
@@ -142,8 +142,8 @@ const ContentPage = () => {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-semibold transition-all duration-300 ${activeTab === tab.id
-                                        ? 'bg-[#5ea85e] text-white shadow-lg'
-                                        : 'text-[#000000]/70 hover:bg-[#5ea85e]/10'
+                                        ? 'bg-[#ff3f74] text-white shadow-lg'
+                                        : 'text-[#000000]/70 hover:bg-[#ff3f74]/10'
                                     }`}
                             >
                                 <tab.icon className="w-5 h-5" />
@@ -207,16 +207,16 @@ const ContentPage = () => {
             </div>
 
             {/* Footer CTA */}
-            <div className="bg-gradient-to-r from-[#5ea85e]/10 to-[#5ea85e]/5 py-16">
+            <div className="bg-gradient-to-r from-[#ff3f74]/10 to-[#ff3f74]/5 py-16">
                 <div className="max-w-4xl mx-auto text-center px-4 space-y-6">
-                    <Heart className="w-12 h-12 text-[#5ea85e] mx-auto" />
+                    <Heart className="w-12 h-12 text-[#ff3f74] mx-auto" />
                     <h3 className="text-2xl font-bold text-[#000000]">Remember, You're Not Alone</h3>
                     <p className="text-[#000000]/70 text-lg leading-relaxed">
                         These resources are here to support you on your journey. Take your time, be kind to yourself,
                         and remember that seeking help is a sign of strength, not weakness.
                     </p>
                     <div className="pt-4">
-                        <button className="bg-[#5ea85e] text-white px-8 py-3 rounded-xl hover:bg-[#4a944a] transition-colors duration-300 font-semibold">
+                        <button className="bg-[#ff3f74] text-white px-8 py-3 rounded-xl hover:bg-[#e73568] transition-colors duration-300 font-semibold">
                             Get Professional Help
                         </button>
                     </div>

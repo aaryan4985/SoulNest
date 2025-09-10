@@ -97,20 +97,20 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="flex flex-col items-center px-4 py-8">
+    <div className="flex flex-col items-center px-4 py-8 min-h-screen bg-[#f4f8ff] font-serif">
       {/* Header */}
-      <h1 className="text-4xl font-extrabold mb-10 text-green-600 text-center">
-        🌿 Happiness Gallery
+      <h1 className="text-4xl font-extrabold mb-10 text-[#ff3f74] text-center">
+         Happiness Gallery
       </h1>
 
       {/* Upload Box */}
       <motion.div
-        className="bg-white p-6 rounded-3xl shadow-xl w-full max-w-lg text-center"
+        className="bg-white p-6 rounded-3xl shadow-xl w-full max-w-lg text-center border border-[#ff3f74]/20"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-lg font-semibold mb-4 text-green-700">
+        <h2 className="text-lg font-semibold mb-4 text-[#ff3f74]">
           Upload a Happy Moment
         </h2>
 
@@ -118,8 +118,8 @@ export default function GalleryPage() {
         <div
           className={`border-2 border-dashed rounded-xl p-6 cursor-pointer mb-4 transition-colors ${
             file
-              ? "border-green-500 bg-green-50"
-              : "border-gray-300 hover:border-green-400 hover:bg-green-50"
+              ? "border-[#ff3f74] bg-[#ff3f74]/10"
+              : "border-gray-300 hover:border-[#ff3f74] hover:bg-[#ff3f74]/5"
           }`}
           onClick={() => document.getElementById("fileInput").click()}
           onDragOver={(e) => e.preventDefault()}
@@ -142,7 +142,7 @@ export default function GalleryPage() {
                   e.stopPropagation();
                   setFile(null);
                 }}
-                className="absolute top-2 right-2 bg-white text-red-500 p-1 rounded-full shadow hover:bg-red-100"
+                className="absolute top-2 right-2 bg-white text-[#ff3f74] p-1 rounded-full shadow hover:bg-[#ff3f74] hover:text-white transition-colors"
               >
                 <X size={16} />
               </button>
@@ -163,7 +163,7 @@ export default function GalleryPage() {
           placeholder="Enter a description..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff3f74] focus:border-[#ff3f74] focus:outline-none transition-colors"
         />
 
         {/* Upload Button */}
@@ -171,7 +171,7 @@ export default function GalleryPage() {
           onClick={handleUpload}
           disabled={loading}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl shadow hover:bg-green-600 transition disabled:opacity-50 mx-auto"
+          className="flex items-center justify-center gap-2 bg-[#ff3f74] text-white px-6 py-3 rounded-xl shadow hover:bg-[#e73568] transition disabled:opacity-50 mx-auto"
         >
           <Upload size={20} /> {loading ? "Uploading..." : "Upload"}
         </motion.button>
@@ -179,7 +179,7 @@ export default function GalleryPage() {
 
       {/* Memories */}
       <div className="w-full max-w-6xl mt-12 text-center">
-        <h2 className="text-2xl font-bold mb-6 text-green-700">
+        <h2 className="text-2xl font-bold mb-6 text-[#ff3f74]">
           Your Memories
         </h2>
 
@@ -190,7 +190,7 @@ export default function GalleryPage() {
             {memories.map((m) => (
               <motion.div
                 key={m.id}
-                className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col"
+                className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition flex flex-col border border-[#ff3f74]/10"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
@@ -207,7 +207,7 @@ export default function GalleryPage() {
                   onClick={() => handleDelete(m.id)}
                   whileHover={{ scale: 1.1, rotate: -10 }}
                   whileTap={{ scale: 0.9 }}
-                  className="absolute top-3 right-3 bg-red-500 text-white p-2 rounded-full shadow hover:bg-red-600"
+                  className="absolute top-3 right-3 bg-[#ff3f74] text-white p-2 rounded-full shadow hover:bg-[#e73568] transition-colors"
                 >
                   <Trash2 size={18} />
                 </motion.button>
