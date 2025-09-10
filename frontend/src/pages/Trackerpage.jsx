@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid,
   BarChart, Bar, PieChart, Pie, Cell, Legend, ResponsiveContainer,
@@ -11,6 +12,8 @@ const VIBRANT_COLORS = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FECA57", "
 const MOOD_COLORS = ["#E74C3C", "#F39C12", "#F1C40F", "#2ECC71", "#3498DB", "#9B59B6", "#1ABC9C", "#E67E22"];
 
 export default function HappinessDashboard() {
+  const navigate = useNavigate();
+  
   const [moodData, setMoodData] = useState([
     { day: "Mon", mood: 8, sleep: 7, exercise: 6, meditation: 5 },
     { day: "Tue", mood: 6, sleep: 6, exercise: 4, meditation: 3 },
@@ -116,10 +119,21 @@ export default function HappinessDashboard() {
   return (
     <div className="min-h-screen bg-[#f4f8ff] p-6 font-['Roboto',sans-serif]">
       {/* Header */}
-      <div className="flex justify-center items-center mb-8">
+      <div className="relative flex justify-center items-center mb-8">
         <div className="bg-white border-2 border-[#ff3f74] rounded-lg px-8 py-4 shadow-lg border-b-4 border-b-[#e73568]">
           <h1 className="text-2xl font-bold text-[#ff3f74]">Happiness Analytics Dashboard</h1>
         </div>
+        
+        {/* Survey Button */}
+        <button
+          onClick={() => navigate('/form')}
+          className="absolute right-0 bg-[#ff3f74] hover:bg-[#e73568] text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105 flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Take Survey
+        </button>
       </div>
 
       {/* Stats Cards */}

@@ -28,6 +28,7 @@ import ContentPage from "./pages/ContentPage";
 import AdminChat from "./pages/AdminChat";
 import ClientChat from "./pages/ClientChat";
 import NewsPage from "./pages/NewsPage";
+import AdminAnalytics from "./pages/AdminAnalytics";
 
 function App() {
   const location = useLocation();
@@ -91,6 +92,14 @@ function App() {
               element={
                 <DashboardLayout>
                   <AdminChat />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/admin/analytics"
+              element={
+                <DashboardLayout>
+                  <AdminAnalytics />
                 </DashboardLayout>
               }
             />
@@ -195,6 +204,14 @@ function App() {
               element={
                 <DashboardLayout>
                   <NewsPage />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/form"
+              element={
+                <DashboardLayout>
+                  <MentalHealthSurvey />
                 </DashboardLayout>
               }
             />

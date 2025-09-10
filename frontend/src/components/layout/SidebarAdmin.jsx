@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FiHome, FiUsers, FiBarChart3, FiSettings, FiLogOut, FiMessageSquare, FiX } from "react-icons/fi";
+import { FiHome, FiUsers, FiBarChart2, FiSettings, FiLogOut, FiMessageSquare, FiX } from "react-icons/fi";
 import SoulNestLogo from "../../assets/SOULNEST.svg";
 
 const SidebarAdmin = ({ className = "", onClose }) => {
@@ -56,6 +56,20 @@ const SidebarAdmin = ({ className = "", onClose }) => {
         >
           <FiMessageSquare className="shrink-0" />
           Admin Chat
+        </NavLink>
+        <NavLink
+          to="/admin/analytics"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition ${
+              isActive ? "text-white" : "hover:bg-white/20 text-gray-700"
+            }`
+          }
+          style={({ isActive }) => ({
+            backgroundColor: isActive ? '#ff3f74' : 'transparent'
+          })}
+        >
+          <FiBarChart2 className="shrink-0" />
+          Analytics
         </NavLink>
       </nav>
     </aside>
