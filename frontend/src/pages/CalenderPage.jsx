@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Card from "../components/layout/Card";
+import CameraModal from "../components/CameraModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { db } from "../config/firebase";
 import { useStore } from "../store/userStore";
@@ -13,17 +14,15 @@ const moodOptions = [
   { emoji: "😢", label: "Sad", color: "from-blue-100 to-blue-200" },
   { emoji: "🤩", label: "Excited", color: "from-pink-100 to-pink-200" },
   { emoji: "😴", label: "Tired", color: "from-purple-100 to-purple-200" },
-  { emoji: "😡", label: "Angry", color: "from-red-100 to-red-200" },
-  { emoji: "❤️", label: "Loved", color: "from-red-100 to-pink-200" }
 ];
 
 export default function CalendarCard() {
   const [moods, setMoods] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCamera, setShowCamera] = useState(false);
   const { user } = useStore();
 
-  // Fetch moods from Firestore on mount
   useEffect(() => {
     const fetchMoods = async () => {
       if (!user) return;
@@ -43,7 +42,6 @@ export default function CalendarCard() {
     fetchMoods();
   }, [user]);
 
-  // Save moods to Firestore whenever they change
   useEffect(() => {
     const saveMoods = async () => {
       if (!user) return;
@@ -61,6 +59,15 @@ export default function CalendarCard() {
     const key = date.toISOString().split("T")[0];
     setMoods((prev) => ({ ...prev, [key]: mood }));
     setSelectedDate(null);
+  };
+
+  const handleCameraDetection = (date, detectedMood) => {
+    setMoodForDay(date, detectedMood);
+    setShowCamera(false);
+  };
+
+  const openCameraModal = () => {
+    setShowCamera(true);
   };
 
   const tileContent = ({ date, view }) => {
@@ -87,7 +94,6 @@ export default function CalendarCard() {
     return null;
   };
 
-  // Custom calendar class names
   const calendarClassNames = {
     calendar: "rounded-2xl shadow-lg p-4 w-full sm:w-[90%] md:w-[80%] lg:w-[70%] border border-gray-200 bg-white",
     navigation: "flex justify-between items-center mb-4",
@@ -156,7 +162,23 @@ export default function CalendarCard() {
                 <h3 className="text-xl font-semibold text-center text-gray-800 mb-2">
                   How did you feel on {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}?
                 </h3>
-                <p className="text-center text-gray-600 mb-6">Select your mood</p>
+                <p className="text-center text-gray-600 mb-6">Select your mood manually or use AI detection</p>
+                
+                <div className="mb-6">
+                  <button
+                    onClick={openCameraModal}
+                    className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors font-medium flex items-center justify-center gap-2"
+                  >
+                    Detect Mood with Camera
+                  </button>
+                  <p className="text-xs text-gray-500 text-center mt-2">
+                    AI will analyze your facial expression
+                  </p>
+                </div>
+
+                <div className="text-center text-gray-500 mb-4 text-sm">
+                  or choose manually
+                </div>
                 
                 <div className="grid grid-cols-4 gap-4">
                   {moodOptions.map((mood, i) => (
@@ -183,6 +205,13 @@ export default function CalendarCard() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <CameraModal
+          isOpen={showCamera}
+          onClose={() => setShowCamera(false)}
+          onMoodDetected={handleCameraDetection}
+          selectedDate={selectedDate}
+        />
       </div>
     </Card>
   );
