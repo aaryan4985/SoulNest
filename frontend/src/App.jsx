@@ -17,6 +17,8 @@ import GalleryPage from "./pages/GalleryPage";
 import BotPage from "./pages/BotPage";
 import ChatPage from "./pages/ChatPage";
 import CalendarPage from "./pages/CalenderPage";
+import ContentPage from './pages/ContentPage';
+
 import { Navigate } from 'react-router-dom';
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
         <Route path="/bot" element={<DashboardLayout><BotPage /></DashboardLayout>} />
         <Route path="/chat" element={<DashboardLayout><ChatPage /></DashboardLayout>} />
         <Route path="/calendar" element={<DashboardLayout><CalendarPage /></DashboardLayout>} />
+        <Route path="/contentpage" element={<DashboardLayout><ContentPage /></DashboardLayout>} />
         <Route path="*" element={<Navigate to="/tracker" replace />} />
       </Routes>
     </Router>
