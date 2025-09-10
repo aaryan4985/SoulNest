@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PreviewVideo from "../assets/Previewvideo.mp4";
 import starIcon from "../assets/star.png";
 import fastIcon from "../assets/fast.png";
@@ -32,6 +33,8 @@ ChartJS.register(
   PointElement,
   LineElement
 );
+
+
 
 // Chart Data
 const stressLevelsData = {
@@ -603,7 +606,7 @@ const LandingPage = ({ isTransitioning }) => {
   const [quoteFade, setQuoteFade] = useState(true);
   const [showCharts, setShowCharts] = useState(false);
   const [showServices, setShowServices] = useState(false);
-  const [chartKey, setChartKey] = useState(0); // Key to force chart re-render for animations
+  const [chartKey, setChartKey] = useState(0);// Key to force chart re-render for animations
   const [chartsAnimated, setChartsAnimated] = useState([
     false,
     false,
@@ -624,6 +627,12 @@ const LandingPage = ({ isTransitioning }) => {
   ]);
   const [showTrustBadges, setShowTrustBadges] = useState(false);
   const [showSignInButton, setShowSignInButton] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate("/signup");
+  };
 
   // Enable perfect smooth scrolling globally
   useEffect(() => {
@@ -910,10 +919,10 @@ const LandingPage = ({ isTransitioning }) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
       : null;
   };
 
@@ -1011,11 +1020,10 @@ const LandingPage = ({ isTransitioning }) => {
             {"SoulNest".split("").map((letter, index) => (
               <span
                 key={index}
-                className={`inline-block transition-all duration-700 ease-out ${
-                  showTitle
+                className={`inline-block transition-all duration-700 ease-out ${showTitle
                     ? "opacity-100 transform translate-y-0 scale-100"
                     : "opacity-0 transform translate-y-12 scale-95"
-                }`}
+                  }`}
                 style={{
                   transitionDelay: showTitle ? `${index * 0.1}s` : "0s",
                 }}
@@ -1027,9 +1035,8 @@ const LandingPage = ({ isTransitioning }) => {
 
           {/* Wellness Quotes Ticker */}
           <div
-            className={`mt-8 transition-opacity duration-700 delay-200 ${
-              showTitle ? "opacity-100" : "opacity-0"
-            }`}
+            className={`mt-8 transition-opacity duration-700 delay-200 ${showTitle ? "opacity-100" : "opacity-0"
+              }`}
           >
             <div
               className="relative overflow-visible mx-auto max-w-2xl"
@@ -1073,9 +1080,8 @@ const LandingPage = ({ isTransitioning }) => {
 
           {/* Action Buttons */}
           <div
-            className={`mt-12 mb-16 transition-opacity duration-700 delay-300 w-full flex justify-center ${
-              showTitle ? "opacity-100" : "opacity-0"
-            }`}
+            className={`mt-12 mb-16 transition-opacity duration-700 delay-300 w-full flex justify-center ${showTitle ? "opacity-100" : "opacity-0"
+              }`}
           >
             <div className="flex w-full max-w-3xl mx-auto gap-4 justify-center">
               <div className="flex-1 max-w-[300px]">
@@ -1162,9 +1168,8 @@ const LandingPage = ({ isTransitioning }) => {
             <div
               className="fixed top-0 left-0 w-screen h-screen transition-opacity duration-1000 ease-in-out"
               style={{
-                background: `rgba(244, 248, 255, ${
-                  0.1 + scrollProgress * 0.2
-                })`, // More translucent light blue overlay with transition
+                background: `rgba(244, 248, 255, ${0.1 + scrollProgress * 0.2
+                  })`, // More translucent light blue overlay with transition
                 opacity: showCharts ? 1 : 0,
                 zIndex: showCharts ? 10 : -1, // Move behind everything when faded out
               }}
@@ -1172,11 +1177,10 @@ const LandingPage = ({ isTransitioning }) => {
             {/* Mental Health Statistics Section */}
             <div
               id="charts-section"
-              className={`mt-16 transition-all duration-1000 relative z-20 ${
-                showCharts
+              className={`mt-16 transition-all duration-1000 relative z-20 ${showCharts
                   ? "opacity-100 transform translate-y-0"
                   : "opacity-0 transform translate-y-10"
-              }`}
+                }`}
             >
               {/* Enhanced Blur Background */}
               <div
@@ -1193,11 +1197,10 @@ const LandingPage = ({ isTransitioning }) => {
               ></div>
               <div className="relative z-10 p-8">
                 <h2
-                  className={`text-6xl font-bold mb-8 text-center transition-all duration-800 relative z-10 px-8 py-4 ${
-                    showCharts
+                  className={`text-6xl font-bold mb-8 text-center transition-all duration-800 relative z-10 px-8 py-4 ${showCharts
                       ? "opacity-100 transform translate-y-0"
                       : "opacity-0 transform translate-y-5"
-                  }`}
+                    }`}
                   style={{
                     fontFamily: "VogueFont, serif",
                     color: "#000000",
@@ -1211,11 +1214,10 @@ const LandingPage = ({ isTransitioning }) => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 max-w-7xl mx-auto px-4 sm:px-6">
                   {/* Stress Levels Pie Chart */}
                   <div
-                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${
-                      chartsAnimated[0]
+                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${chartsAnimated[0]
                         ? "opacity-100 translate-y-0 scale-100"
                         : "opacity-0 translate-y-8 scale-95"
-                    }`}
+                      }`}
                     style={{
                       backgroundColor: "#f4f8ff",
                       borderColor: "#000000",
@@ -1242,11 +1244,10 @@ const LandingPage = ({ isTransitioning }) => {
 
                   {/* Common Issues Bar Chart */}
                   <div
-                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${
-                      chartsAnimated[1]
+                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${chartsAnimated[1]
                         ? "opacity-100 translate-y-0 scale-100"
                         : "opacity-0 translate-y-8 scale-95"
-                    }`}
+                      }`}
                     style={{
                       backgroundColor: "#f4f8ff",
                       borderColor: "#000000",
@@ -1273,11 +1274,10 @@ const LandingPage = ({ isTransitioning }) => {
 
                   {/* Help-Seeking Preferences Doughnut Chart */}
                   <div
-                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${
-                      chartsAnimated[2]
+                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${chartsAnimated[2]
                         ? "opacity-100 translate-y-0 scale-100"
                         : "opacity-0 translate-y-8 scale-95"
-                    }`}
+                      }`}
                     style={{
                       backgroundColor: "#f4f8ff",
                       borderColor: "#000000",
@@ -1304,11 +1304,10 @@ const LandingPage = ({ isTransitioning }) => {
 
                   {/* Weekly Mood Trend Line Chart */}
                   <div
-                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${
-                      chartsAnimated[3]
+                    className={`p-4 sm:p-6 md:p-8 border cursor-pointer transition-all duration-700 transform ${chartsAnimated[3]
                         ? "opacity-100 translate-y-0 scale-100"
                         : "opacity-0 translate-y-8 scale-95"
-                    }`}
+                      }`}
                     style={{
                       backgroundColor: "#f4f8ff",
                       borderColor: "#000000",
@@ -1412,11 +1411,10 @@ const LandingPage = ({ isTransitioning }) => {
           {/* Services Section */}
           <div
             id="services-section"
-            className={`mt-16 p-8 transition-all duration-1000 transform relative z-20 ${
-              showServices
+            className={`mt-16 p-8 transition-all duration-1000 transform relative z-20 ${showServices
                 ? "opacity-100 translate-y-0 scale-100"
                 : "opacity-0 translate-y-10 scale-95"
-            }`}
+              }`}
             style={{
               backgroundColor: "#ff3f74",
               border: "none",
@@ -1439,11 +1437,10 @@ const LandingPage = ({ isTransitioning }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto px-4">
               {/* AI Support Card */}
               <div
-                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${
-                  servicesAnimated[0]
+                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${servicesAnimated[0]
                     ? "opacity-100 translate-x-0 rotate-0"
                     : "opacity-0 -translate-x-10 -rotate-3"
-                }`}
+                  }`}
                 style={{
                   backgroundColor: "rgba(244, 248, 255, 0.9)",
                   borderColor: "#000000",
@@ -1478,11 +1475,10 @@ const LandingPage = ({ isTransitioning }) => {
 
               {/* Counselling Card */}
               <div
-                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${
-                  servicesAnimated[1]
+                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${servicesAnimated[1]
                     ? "opacity-100 translate-x-0 rotate-0"
                     : "opacity-0 translate-x-10 rotate-3"
-                }`}
+                  }`}
                 style={{
                   backgroundColor: "rgba(244, 248, 255, 0.9)",
                   borderColor: "#000000",
@@ -1517,11 +1513,10 @@ const LandingPage = ({ isTransitioning }) => {
 
               {/* Resource Hub Card */}
               <div
-                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${
-                  servicesAnimated[2]
+                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${servicesAnimated[2]
                     ? "opacity-100 translate-x-0 rotate-0"
                     : "opacity-0 -translate-x-10 -rotate-3"
-                }`}
+                  }`}
                 style={{
                   backgroundColor: "rgba(244, 248, 255, 0.9)",
                   borderColor: "#000000",
@@ -1556,11 +1551,10 @@ const LandingPage = ({ isTransitioning }) => {
 
               {/* Peer Support Card */}
               <div
-                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${
-                  servicesAnimated[3]
+                className={`backdrop-blur-lg p-6 border hover:scale-105 transition-all duration-700 transform ${servicesAnimated[3]
                     ? "opacity-100 translate-x-0 rotate-0"
                     : "opacity-0 translate-x-10 rotate-3"
-                }`}
+                  }`}
                 style={{
                   backgroundColor: "rgba(244, 248, 255, 0.9)",
                   borderColor: "#000000",
@@ -1598,11 +1592,10 @@ const LandingPage = ({ isTransitioning }) => {
           {/* Trust Badges Section */}
           <div
             id="trust-badges-section"
-            className={`mt-20 py-16 transition-all duration-1000 relative z-20 ${
-              showTrustBadges
+            className={`mt-20 py-16 transition-all duration-1000 relative z-20 ${showTrustBadges
                 ? "opacity-100 transform translate-y-0"
                 : "opacity-0 transform translate-y-10"
-            }`}
+              }`}
           >
             <div className="max-w-6xl mx-auto px-4">
               <h2
@@ -1620,11 +1613,10 @@ const LandingPage = ({ isTransitioning }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {/* Secure & Private Badge */}
                 <div
-                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${
-                    trustBadgesAnimated[0]
+                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${trustBadgesAnimated[0]
                       ? "opacity-100 translate-y-0 scale-100"
                       : "opacity-0 translate-y-8 scale-95"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.95)",
                     backdropFilter: "blur(10px)",
@@ -1663,11 +1655,10 @@ const LandingPage = ({ isTransitioning }) => {
 
                 {/* Fast Support Badge */}
                 <div
-                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${
-                    trustBadgesAnimated[1]
+                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${trustBadgesAnimated[1]
                       ? "opacity-100 translate-y-0 scale-100"
                       : "opacity-0 translate-y-8 scale-95"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.95)",
                     backdropFilter: "blur(10px)",
@@ -1706,11 +1697,10 @@ const LandingPage = ({ isTransitioning }) => {
 
                 {/* Student-Centered Badge */}
                 <div
-                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${
-                    trustBadgesAnimated[2]
+                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${trustBadgesAnimated[2]
                       ? "opacity-100 translate-y-0 scale-100"
                       : "opacity-0 translate-y-8 scale-95"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.95)",
                     backdropFilter: "blur(10px)",
@@ -1749,11 +1739,10 @@ const LandingPage = ({ isTransitioning }) => {
 
                 {/* Reliable & Transparent Badge */}
                 <div
-                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${
-                    trustBadgesAnimated[3]
+                  className={`text-center p-12 transition-all duration-700 transform hover:scale-105 ${trustBadgesAnimated[3]
                       ? "opacity-100 translate-y-0 scale-100"
                       : "opacity-0 translate-y-8 scale-95"
-                  }`}
+                    }`}
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.95)",
                     backdropFilter: "blur(10px)",
@@ -1796,15 +1785,16 @@ const LandingPage = ({ isTransitioning }) => {
         {/* Close video background container */}
       </div>
 
-      {/* Fixed Sign Button - Bottom Left */}
       <div
-        className={`fixed bottom-6 left-6 z-50 transition-all duration-1000 ease-out ${
-          showSignInButton
+        className={`fixed bottom-6 left-6 z-50 transition-all duration-1000 ease-out ${showSignInButton
             ? "opacity-100 transform translate-y-0 scale-100"
             : "opacity-0 transform translate-y-8 scale-95"
-        }`}
+          }`}
       >
-        <button className="relative group border-none bg-transparent p-0 outline-none cursor-pointer font-mono font-light uppercase text-base">
+        <button
+          onClick={handleSignUpClick}
+          className="relative group border-none bg-transparent p-0 outline-none cursor-pointer font-mono font-light uppercase text-base"
+        >
           <span className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25 transform translate-y-0.5 transition duration-[600ms] ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:translate-y-1 group-hover:duration-[250ms] group-active:translate-y-px" />
           <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-l from-[#000000] via-[#2a2a2a] to-[#000000]" />
           <div className="relative flex items-center justify-between py-3 px-6 text-lg text-white transform -translate-y-1 bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#000000] gap-3 transition duration-[600ms] ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:-translate-y-1.5 group-hover:duration-[250ms] group-active:-translate-y-0.5 brightness-100 group-hover:brightness-110">
@@ -1815,7 +1805,7 @@ const LandingPage = ({ isTransitioning }) => {
               className="w-5 h-5 ml-2 -mr-1 transition duration-250 group-hover:translate-x-1"
             >
               <path
-                clipRule="evenodd"     
+                clipRule="evenodd"
                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                 fillRule="evenodd"
               />
