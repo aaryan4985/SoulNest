@@ -1,18 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {
   createSOSAlert,
   getSOSAlerts,
   updateSOSAlert,
-  getActiveAlertsCount
-} = require('../controllers/sosController');
+  getActiveAlertsCount,
+} = require("../controllers/sosController");
 
 // Client routes
-router.post('/alert', createSOSAlert);
+router.post("/alert", createSOSAlert);
 
 // Admin routes
-router.get('/alerts', getSOSAlerts);
-router.get('/alerts/count', getActiveAlertsCount);
-router.put('/alerts/:id', updateSOSAlert);
+router.get("/alerts", getSOSAlerts);
+router.get("/alerts/count", getActiveAlertsCount);
+router.put("/alerts/:id", updateSOSAlert);
 
 module.exports = router;

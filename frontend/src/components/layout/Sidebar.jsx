@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FiHeart, FiImage, FiMessageCircle, FiCalendar, FiClock, FiClipboard, FiBookOpen, FiLogOut, FiX, FiMessageSquare } from "react-icons/fi";
+import { FiHeart, FiImage, FiMessageCircle, FiCalendar, FiClock, FiClipboard, FiBookOpen, FiLogOut, FiX, FiMessageSquare, FiFileText } from "react-icons/fi";
 import SoulNestLogo from '../../assets/SOULNEST.svg';
 
 const navItems = [
@@ -11,6 +11,7 @@ const navItems = [
   { to: "/tos", label: "Wellness Assessment", icon: FiClipboard },
   { to: "/gallery", label: "Happiness Gallery", icon: FiImage },
   { to: "/contentpage", label: "Resource Hub", icon: FiBookOpen },
+  { to: "/newspage", label: "News & Articles", icon: FiFileText },
 ];
 
 export default function Sidebar({ className = "", user, onSignOut, onToggle }) {

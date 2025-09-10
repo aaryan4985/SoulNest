@@ -36,12 +36,12 @@ export default function HappinessDashboard() {
   });
 
   const barData = [
-    { name: "18-24", count: 24, emoji: "😀" },
-    { name: "25-34", count: 28, emoji: "🙂" },
-    { name: "35-44", count: 22, emoji: "😐" },
-    { name: "45-54", count: 16.2, emoji: "😕" },
-    { name: "55-64", count: 11.7, emoji: "😢" },
-    { name: "65+", count: 4.6, emoji: "😴" },
+    { name: "Morning", count: 32, emoji: "🌅" },
+    { name: "Afternoon", count: 28, emoji: "☀️" },
+    { name: "Evening", count: 25, emoji: "🌆" },
+    { name: "Night", count: 18, emoji: "🌙" },
+    { name: "Late Night", count: 12, emoji: "🌃" },
+    { name: "Early Dawn", count: 8, emoji: "🌄" },
   ];
 
   const pieData = [
@@ -189,10 +189,10 @@ export default function HappinessDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Left Column - Charts */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Age Distribution Bar Chart */}
+          {/* Time Distribution Bar Chart */}
           <div className="bg-white rounded-xl p-6 shadow-md border border-[#ff3f74]/20">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-[#ff3f74]">Age Distribution of Happy Users</h3>
+              <h3 className="text-lg font-semibold text-[#ff3f74]">Time Distribution of Happiness</h3>
               <div className="w-8 h-8 bg-gradient-to-br from-[#ff3f74]/20 to-[#ff3f74]/10 rounded-full flex items-center justify-center">
                 <span className="text-lg">📊</span>
               </div>

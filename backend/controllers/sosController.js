@@ -6,7 +6,7 @@ let alertIdCounter = 1;
 const createSOSAlert = (req, res) => {
   try {
     const { clientId, clientName, message, location } = req.body;
-    
+
     const alert = {
       id: alertIdCounter++,
       clientId,
@@ -15,28 +15,28 @@ const createSOSAlert = (req, res) => {
       location: location || "Unknown",
       timestamp: new Date().toISOString(),
       status: "active", // active, acknowledged, resolved
-      priority: "critical"
+      priority: "critical",
     };
-    
+
     sosAlerts.unshift(alert); // Add to beginning of array
-    
+
     // Keep only last 100 alerts
     if (sosAlerts.length > 100) {
       sosAlerts = sosAlerts.slice(0, 100);
     }
-    
+
     console.log(`🚨 SOS Alert created for ${alert.clientName}`);
-    
+
     res.json({
       success: true,
       message: "SOS alert created successfully",
-      data: alert
+      data: alert,
     });
   } catch (error) {
     console.error("Error creating SOS alert:", error);
     res.status(500).json({
       success: false,
-      message: "Failed to create SOS alert"
+      message: "Failed to create SOS alert",
     });
   }
 };
@@ -45,22 +45,22 @@ const createSOSAlert = (req, res) => {
 const getSOSAlerts = (req, res) => {
   try {
     const { status } = req.query;
-    
+
     let filteredAlerts = sosAlerts;
     if (status) {
-      filteredAlerts = sosAlerts.filter(alert => alert.status === status);
+      filteredAlerts = sosAlerts.filter((alert) => alert.status === status);
     }
-    
+
     res.json({
       success: true,
       data: filteredAlerts,
-      total: filteredAlerts.length
+      total: filteredAlerts.length,
     });
   } catch (error) {
     console.error("Error fetching SOS alerts:", error);
     res.status(500).json({
       success: false,
-      message: "Failed to fetch SOS alerts"
+      message: "Failed to fetch SOS alerts",
     });
   }
 };
@@ -70,29 +70,31 @@ const updateSOSAlert = (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
-    
-    const alertIndex = sosAlerts.findIndex(alert => alert.id === parseInt(id));
-    
+
+    const alertIndex = sosAlerts.findIndex(
+      (alert) => alert.id === parseInt(id)
+    );
+
     if (alertIndex === -1) {
       return res.status(404).json({
         success: false,
-        message: "SOS alert not found"
+        message: "SOS alert not found",
       });
     }
-    
+
     sosAlerts[alertIndex].status = status;
     sosAlerts[alertIndex].updatedAt = new Date().toISOString();
-    
+
     res.json({
       success: true,
       message: "SOS alert updated successfully",
-      data: sosAlerts[alertIndex]
+      data: sosAlerts[alertIndex],
     });
   } catch (error) {
     console.error("Error updating SOS alert:", error);
     res.status(500).json({
       success: false,
-      message: "Failed to update SOS alert"
+      message: "Failed to update SOS alert",
     });
   }
 };
@@ -100,17 +102,19 @@ const updateSOSAlert = (req, res) => {
 // Get active alerts count
 const getActiveAlertsCount = (req, res) => {
   try {
-    const activeCount = sosAlerts.filter(alert => alert.status === "active").length;
-    
+    const activeCount = sosAlerts.filter(
+      (alert) => alert.status === "active"
+    ).length;
+
     res.json({
       success: true,
-      data: { count: activeCount }
+      data: { count: activeCount },
     });
   } catch (error) {
     console.error("Error getting active alerts count:", error);
     res.status(500).json({
       success: false,
-      message: "Failed to get active alerts count"
+      message: "Failed to get active alerts count",
     });
   }
 };
@@ -119,5 +123,5 @@ module.exports = {
   createSOSAlert,
   getSOSAlerts,
   updateSOSAlert,
-  getActiveAlertsCount
+  getActiveAlertsCount,
 };

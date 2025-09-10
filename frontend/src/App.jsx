@@ -27,6 +27,7 @@ import CalendarPage from "./pages/CalenderPage";
 import ContentPage from "./pages/ContentPage";
 import AdminChat from "./pages/AdminChat";
 import ClientChat from "./pages/ClientChat";
+import NewsPage from "./pages/NewsPage";
 
 function App() {
   const location = useLocation();
@@ -186,6 +187,14 @@ function App() {
               element={
                 <DashboardLayout>
                   <ContentPage />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/newspage"
+              element={
+                <DashboardLayout>
+                  <NewsPage />
                 </DashboardLayout>
               }
             />

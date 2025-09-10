@@ -387,7 +387,6 @@ Respond as a caring friend who understands student challenges and mental health 
               <Send className="w-5 h-5" />
             </button>
           </div>
-m
           {/* Status text */}
           <div className="flex items-center justify-center mt-2">
             <p className="text-sm text-gray-400 font-medium">

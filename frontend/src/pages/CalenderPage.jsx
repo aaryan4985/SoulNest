@@ -15,11 +15,11 @@ import excitedImg from "../assets/excited.png";
 import angryImg from "../assets/angry.png";
 
 const moodOptions = [
-  { emoji: smileImg, label: "Happy", color: "from-[#ff3f74]/20 to-[#e73568]/30", isImage: true },
-  { emoji: neutralImg, label: "Neutral", color: "from-gray-100 to-gray-200", isImage: true },
-  { emoji: sadImg, label: "Sad", color: "from-blue-100 to-blue-200", isImage: true },
-  { emoji: excitedImg, label: "Excited", color: "from-[#ff3f74]/30 to-[#e73568]/40", isImage: true },
-  { emoji: angryImg, label: "Angry", color: "from-red-100 to-red-200", isImage: true },
+  { emoji: smileImg, label: "Happy", color: "from-yellow-200 to-yellow-300", isImage: true },
+  { emoji: neutralImg, label: "Neutral", color: "from-yellow-100 to-yellow-200", isImage: true },
+  { emoji: sadImg, label: "Sad", color: "from-blue-200 to-blue-300", isImage: true },
+  { emoji: excitedImg, label: "Excited", color: "from-pink-200 to-pink-300", isImage: true },
+  { emoji: angryImg, label: "Angry", color: "from-red-200 to-red-300", isImage: true },
 ];
 
 export default function CalendarCard() {
