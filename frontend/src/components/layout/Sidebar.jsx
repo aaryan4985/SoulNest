@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FiHeart, FiImage, FiMessageCircle, FiCalendar, FiClock, FiClipboard, FiBookOpen, FiLogOut, FiX } from "react-icons/fi";
 import SoulNestLogo from '../../assets/SOULNEST.svg';
+import { auth } from "../../config/firebase";
 
 const navItems = [
   { to: "/tracker", label: "Happiness Tracker", icon: FiHeart },
@@ -16,9 +17,9 @@ export default function Sidebar({ className = "", user, onSignOut, onToggle }) {
   return (
     <aside className={`w-72 h-screen fixed left-0 top-0 flex flex-col backdrop-blur border-r border-gray-200 p-6 transition-transform duration-300 ease-in-out z-30 ${className}`} style={{ backgroundColor: '#f4f8ff' }}>
       <div className="flex items-center justify-between mb-10">
-        <img 
-          src={SoulNestLogo} 
-          alt="SoulNest" 
+        <img
+          src={SoulNestLogo}
+          alt="SoulNest"
           className="h-16"
         />
         <button
@@ -30,15 +31,14 @@ export default function Sidebar({ className = "", user, onSignOut, onToggle }) {
           <FiX className="w-4 h-4 text-white" />
         </button>
       </div>
-      
+
       <nav className="flex flex-col gap-1 flex-grow overflow-hidden">
         {navItems.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={label}
             to={to}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition ${
-                isActive ? "text-white" : "hover:bg-white/20 text-gray-700"
+              `flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition ${isActive ? "text-white" : "hover:bg-white/20 text-gray-700"
               }`
             }
             style={({ isActive }) => ({
@@ -66,10 +66,10 @@ export default function Sidebar({ className = "", user, onSignOut, onToggle }) {
           />
           <div className="flex-1 min-w-0">
             <div className="font-medium text-sm truncate text-gray-800">{user?.displayName || user?.email?.split("@")[0]}</div>
-            <div className="text-xs text-gray-600 truncate">{user?.email}</div>
+            <div className="text-xs text-gray-600 truncate">{auth.currentUser?.email}</div>
           </div>
         </div>
-        
+
         <button
           onClick={onSignOut}
           className="w-full flex items-center gap-3 px-4 py-2 rounded-xl text-sm font-medium transition text-white hover:opacity-90"

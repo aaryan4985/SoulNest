@@ -1814,7 +1814,6 @@ const LandingPage = ({ isTransitioning }) => {
         </button>
       </div>
 
-      {/* Scroll to Top Button */}
       <ScrollToTopButton />
     </div>
   );
