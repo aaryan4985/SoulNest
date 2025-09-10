@@ -10,7 +10,6 @@ function Tos() {
                     {/* Left side - SVG Image */}
                     <div className="flex justify-center lg:justify-start order-2 lg:order-1">
                         <div className="relative">
-                            <div className="absolute inset-0 rounded-3xl transform rotate-3" style={{ backgroundColor: 'rgba(255, 63, 116, 0.1)' }}></div>
                             <img 
                                 src={RemoteWorkerSvg} 
                                 alt="Student Wellness" 
