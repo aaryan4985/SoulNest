@@ -4,9 +4,11 @@ import { FiBarChart2, FiImage, FiCpu, FiSend, FiCalendar, FiAlertTriangle } from
 const navItems = [
   { to: "/tracker", label: "Happiness Tracker", icon: FiBarChart2 },
   { to: "/gallery", label: "Happiness Gallery", icon: FiImage },
-  { to: "/bot", label: "AI Bot", icon: FiCpu },
-  { to: "/chat", label: "AI Chatbot", icon: FiSend },
+  { to: "/chatbot", label: "AI Therapist", icon: FiSend },
+  { to: "/appointment", label: "Book Appointment  ", icon: FiCalendar },
   { to: "/calendar", label: "Calendar", icon: FiCalendar },
+  { to: "/tos", label: "Psychological Assessment", icon: FiCalendar },
+  { to: "/contentpage", label: "Resorce Hub", icon: FiCalendar },
 ];
 
 export default function Sidebar({ className = "" }) {
