@@ -5,7 +5,7 @@ import { useStore } from "../../store/userStore";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiPhone } from "react-icons/fi";
 
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -59,6 +59,20 @@ export default function DashboardLayout({ children }) {
           {children}
         </main>
       </div>
+
+      {/* Fixed SOS Button - Bottom Right */}
+      <button
+        onClick={() => navigate("/sos")}
+        className="fixed bottom-6 right-6 w-16 h-16 rounded-full text-white font-bold text-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 z-50 flex items-center justify-center border-4 border-white"
+        style={{ 
+          backgroundColor: '#ef4444',
+          boxShadow: '0 0 0 6px #ef4444, 0 4px 20px rgba(0,0,0,0.3)'
+        }}
+        aria-label="Emergency SOS"
+        title="Emergency SOS"
+      >
+        SOS
+      </button>
     </div>
   );
 }
