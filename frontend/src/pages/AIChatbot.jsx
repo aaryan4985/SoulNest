@@ -21,6 +21,7 @@ const AIChatbot = () => {
     `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
   );
   const messagesEndRef = useRef(null);
+  // We'll dispatch a global event to open the app-wide SOS popup handled by DashboardLayout
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -207,15 +208,19 @@ Respond as a caring friend who understands student challenges and mental health 
 
       setMessages((prev) => [...prev, botMessage]);
 
-      // Enhanced risk alerts
-      if (riskLevel === "high") {
+      // Show app-wide SOS popup for medium/high risk by dispatching a global event
+      if (riskLevel === "high" || riskLevel === "medium") {
         setTimeout(() => {
-          alert("⚠️ I'm concerned about what you've shared. Please reach out for immediate help:\n\n🔴 Emergency: 911\n📞 Crisis Text Line: Text HOME to 741741\n☎️ National Suicide Prevention Lifeline: 988\n\nYou matter and help is available 24/7.");
-        }, 1000);
-      } else if (riskLevel === "medium") {
-        setTimeout(() => {
-          alert("🔔 I notice you might be struggling. Consider talking to:\n\n• School counselor\n• Trusted adult or family member\n• Mental health professional\n• Crisis Text Line: Text HOME to 741741\n\nYou don't have to go through this alone.");
-        }, 1000);
+          try {
+            const ev = new CustomEvent('openSOSPopup', { detail: { level: riskLevel } });
+            window.dispatchEvent(ev);
+          } catch (e) {
+            // fallback: open local SosModal if dispatch fails
+            setTimeout(() => {
+              // no-op: keep local handling minimal
+            }, 100);
+          }
+        }, 800);
       }
     } catch (error) {
       console.error("Error sending message:", error);
@@ -232,7 +237,7 @@ Respond as a caring friend who understands student challenges and mental health 
 
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
-      setIsLoading(false);
+  setIsLoading(false);
     }
   };
 

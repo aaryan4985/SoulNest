@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FiSend, FiUser, FiClock, FiCheck, FiCheckCircle, FiPhone, FiVideo } from "react-icons/fi";
+import { FiSend, FiUser, FiClock, FiCheck, FiCheckCircle } from "react-icons/fi";
 import { Send } from "lucide-react";
 import { useStore } from "../store/userStore";
 import MockAvatar from "../assets/mock_avatar.svg";
@@ -201,21 +201,6 @@ const ClientChat = () => {
               )}
             </p>
           </div>
-        </div>
-        
-        <div className="flex items-center space-x-2">
-          <button
-            className="p-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10"
-            title="Voice Call"
-          >
-            <FiPhone className="w-5 h-5" />
-          </button>
-          <button
-            className="p-2 text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10"
-            title="Video Call"
-          >
-            <FiVideo className="w-5 h-5" />
-          </button>
         </div>
       </div>
 

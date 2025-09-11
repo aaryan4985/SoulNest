@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import LanguageDisplay from "../components/LanguageDisplay";
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid,
   BarChart, Bar, PieChart, Pie, Cell, Legend, ResponsiveContainer,
@@ -120,6 +121,16 @@ export default function HappinessDashboard() {
     <div className="min-h-screen bg-[#f4f8ff] p-6 font-['Roboto',sans-serif]">
       {/* Header */}
       <div className="relative flex justify-center items-center mb-8">
+        {/* Speed Dial Button */}
+        <button
+          onClick={() => navigate('/emergency')}
+          className="absolute left-0 bg-[#ff3f74] hover:bg-[#e73568] text-white font-semibold px-4 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105"
+          title="Speed Dial - Emergency Contacts"
+        >
+          <span className="text-lg"></span>
+          <span className="hidden sm:inline">Speed Dial</span>
+        </button>
+        
         <div className="bg-white border-2 border-[#ff3f74] rounded-lg px-8 py-4 shadow-lg border-b-4 border-b-[#e73568]">
           <h1 className="text-2xl font-bold text-[#ff3f74]">Happiness Analytics Dashboard</h1>
         </div>
@@ -136,7 +147,9 @@ export default function HappinessDashboard() {
         </button>
       </div>
 
+
       {/* Stats Cards */}
+  {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white rounded-xl p-6 shadow-md border border-[#ff3f74]/20">
           <div className="flex justify-between items-start">

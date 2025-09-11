@@ -1,8 +1,9 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import SidebarAdmin from "./SidebarAdmin";
 import SOSPopup from "../SOSPopup";
+import LanguageSelector from "../LanguageSelector";
 import { useStore } from "../../store/userStore";
 import { useNavigate, useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -12,6 +13,7 @@ import { FiMenu, FiX, FiPhone } from "react-icons/fi";
 export default function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true); // Default to true for admin sidebar
   const [sosPopupOpen, setSOSPopupOpen] = useState(false);
+  const [sosLevel, setSOSLevel] = useState('high');
   const { user, setUser } = useStore();
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,7 +42,8 @@ export default function DashboardLayout({ children }) {
           clientId: user?.uid || 'anonymous',
           clientName: user?.displayName || user?.email || 'Anonymous User',
           message: "Emergency assistance required - SOS button activated",
-          location: "Web Application",
+            location: "Web Application",
+            level: sosLevel,
           timestamp: new Date().toISOString()
         })
       });
@@ -56,6 +59,17 @@ export default function DashboardLayout({ children }) {
       console.error("Error sending SOS alert:", error);
     }
   };
+
+  // Listen for global requests to open the SOS popup (e.g., from chatbot)
+  useEffect(() => {
+    const onOpenFromApp = (e) => {
+  setSOSLevel((e && e.detail && e.detail.level) || 'high');
+  setSOSPopupOpen(true);
+    };
+
+    window.addEventListener('openSOSPopup', onOpenFromApp);
+    return () => window.removeEventListener('openSOSPopup', onOpenFromApp);
+  }, []);
 
   return (
     <div className="flex min-h-screen">
@@ -143,6 +157,11 @@ export default function DashboardLayout({ children }) {
         <main className="flex-1 h-full">
           {children}
         </main>
+      </div>
+
+      {/* Fixed Language Selector Button - Very top right corner */}
+      <div className="fixed top-1 right-1 z-50">
+        <LanguageSelector />
       </div>
 
       {/* Fixed SOS Button - Only show for non-admin pages */}

@@ -6,6 +6,7 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import LandingPage from "./pages/LandingPage";
 import LoadingPage from "./components/LoadingPage";
 import Signup from "./pages/Signup";
@@ -29,6 +30,7 @@ import AdminChat from "./pages/AdminChat";
 import ClientChat from "./pages/ClientChat";
 import NewsPage from "./pages/NewsPage";
 import AdminAnalytics from "./pages/AdminAnalytics";
+import EmergencyButtons from "./pages/EmergencyButtons";
 
 function App() {
   const location = useLocation();
@@ -215,6 +217,14 @@ function App() {
                 </DashboardLayout>
               }
             />
+            <Route
+              path="/emergency"
+              element={
+                <DashboardLayout>
+                  <EmergencyButtons />
+                </DashboardLayout>
+              }
+            />
             <Route path="/survey" element={<MentalHealthSurvey />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
@@ -227,7 +237,9 @@ function App() {
 export default function WrappedApp() {
   return (
     <Router>
-      <App />
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
     </Router>
   );
 }

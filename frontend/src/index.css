@@ -10,6 +10,82 @@
   font-style: normal;
 }
 
+/* Hide Google Translate elements - Enhanced */
+.goog-te-banner-frame,
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-gadget-icon,
+.goog-te-menu-value,
+.goog-te-balloon-frame,
+div#goog-gt-tt,
+div.goog-te-balloon,
+.skiptranslate,
+iframe.goog-te-banner-frame,
+.goog-te-ftab,
+.goog-te-menu2,
+.goog-te-tr,
+.goog-te-combo,
+.goog-te-menu-frame,
+#google_translate_element,
+#google_translate_element > div,
+#google_translate_element > div > div,
+#google_translate_element div.skiptranslate > div,
+#google_translate_element div.skiptranslate > div > div:nth-child(1),
+div[id*="goog-gt"],
+div[class*="goog-te"],
+span[class*="goog-te"],
+div[class*="skiptranslate"],
+iframe[src*="translate.google.com"],
+iframe[src*="translate.googleapis.com"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+.goog-te-menu-value span {
+  color: transparent !important;
+}
+
+/* Fix body top margin caused by Google Translate - Enhanced */
+body,
+body.goog-te-WidgetIsLoaded,
+body.translated-page,
+html[translate="yes"] body {
+  top: 0 !important;
+  margin-top: 0 !important;
+  position: static !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  transform: none !important;
+}
+
+/* Custom scrollbar for language dropdown */
+.language-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.language-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.language-dropdown::-webkit-scrollbar-thumb {
+  background: #ff3f74;
+  border-radius: 4px;
+}
+
+.language-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #e73568;
+}
+
 /* Global scroll hiding - hide scrollbar but allow scrolling */
 html,
 body {
