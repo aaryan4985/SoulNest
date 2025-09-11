@@ -7,7 +7,7 @@ const navItems = [
   { to: "/chatbot", label: "AI Therapist", icon: FiMessageCircle },
   { to: "/client/chat", label: "Peer to Peer Chat", icon: FiMessageSquare },
   { to: "/appointment", label: "Book Appointment", icon: FiCalendar },
-  { to: "/calendar", label: "Calendar", icon: FiClock },
+  { to: "/calendar", label: " Mood Calendar", icon: FiClock },
   { to: "/tos", label: "Wellness Assessment", icon: FiClipboard },
   { to: "/gallery", label: "Happiness Gallery", icon: FiImage },
   { to: "/contentpage", label: "Resource Hub", icon: FiBookOpen },
