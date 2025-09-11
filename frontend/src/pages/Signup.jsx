@@ -3,7 +3,12 @@ import { faUser, faLock, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-i
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { 
+    createUserWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    sendEmailVerification 
+} from "firebase/auth";
 
 function Signup() {
     const [signupInfo, setSignupInfo] = useState({ role: "", username: "", password: "" });
@@ -15,7 +20,6 @@ function Signup() {
 
     const handleChange = (e) => {
         setSignupInfo({ ...signupInfo, [e.target.name]: e.target.value });
-        // Clear error when user starts typing
         if (error) setError("");
     };
 
@@ -27,7 +31,6 @@ function Signup() {
         e.preventDefault();
         setError("");
 
-        // Validation
         if (!signupInfo.role) {
             setError("Please select a role.");
             return;
@@ -41,18 +44,21 @@ function Signup() {
         setIsLoading(true);
         
         try {
-            // Use username as email for Firebase authentication
-            await createUserWithEmailAndPassword(auth, signupInfo.username, signupInfo.password);
-            console.log("Signup successful:", { 
-                role: signupInfo.role, 
-                email: signupInfo.username 
-            });
-            
-            // Navigate to login page after successful signup
+            const userCredential = await createUserWithEmailAndPassword(
+                auth, 
+                signupInfo.username, 
+                signupInfo.password
+            );
+
+            // ✅ Send email verification
+            await sendEmailVerification(userCredential.user);
+
+            alert("A verification email has been sent. Please verify before logging in.");
+
+            // Navigate to login after signup
             navigate("/login");
         } catch (error) {
             console.error("Signup error:", error);
-            // Handle different types of Firebase auth errors
             switch (error.code) {
                 case 'auth/email-already-in-use':
                     setError("An account with this email already exists.");
@@ -82,8 +88,6 @@ function Signup() {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
             console.log("Google signup successful");
-            
-            // Navigate to login page after successful Google signup
             navigate("/login");
         } catch (error) {
             console.error("Google signup error:", error);
@@ -97,36 +101,29 @@ function Signup() {
 
     return (
         <div className="min-h-screen flex" style={{ backgroundColor: '#f4f8ff' }}>
-            
+            {/* Left side image */}
             <div className="w-1/2 flex items-center justify-center p-8">
                 <div className="max-w-lg w-full">
-                    <img
-                        src="/hello3(1).svg"
-                        alt="Signup Illustration"
-                        className="w-full h-auto object-contain opacity-100"
-                    />
+                    <img src="/hello3(1).svg" alt="Signup Illustration" className="w-full h-auto" />
                 </div>
             </div>
 
-            
+            {/* Signup form */}
             <div className="w-1/2 flex items-center justify-center p-8">
                 <div className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md mx-auto">
                     <div className="w-full space-y-5">
-
                         <div className="text-center">
                             <img src="/soulnest_title.svg" alt="Logo" className="inline-block h-28 mx-auto" />
                             <h2 className="text-2xl font-bold text-gray-800 mt-3">Welcome!</h2>
                             <p className="text-base text-gray-500">Create your SoulNest account</p>
                         </div>
 
-                        {/* Error Message */}
                         {error && (
                             <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm border border-red-200">
                                 {error}
                             </div>
                         )}
 
-                        
                         <button
                             onClick={handleGoogleSignup}
                             disabled={isLoading}
@@ -141,7 +138,6 @@ function Signup() {
                             <span>{isLoading ? "Signing up..." : "Continue with Google"}</span>
                         </button>
 
-                        
                         <div className="relative">
                             <div className="absolute inset-0 flex items-center">
                                 <div className="w-full border-t border-gray-300"></div>
@@ -161,12 +157,7 @@ function Signup() {
                                     onChange={handleChange}
                                     disabled={isLoading}
                                     required
-                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 disabled:opacity-60 disabled:cursor-not-allowed"
-                                    style={{ 
-                                        '--tw-ring-color': '#ff3f7a',
-                                        '--tw-ring-offset-shadow': '0 0 0 0 transparent',
-                                        '--tw-ring-shadow': '0 0 0 2px #ff3f7a'
-                                    }}
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 disabled:opacity-60"
                                 >
                                     <option value="">Select...</option>
                                     <option value="student">Student</option>
@@ -189,7 +180,7 @@ function Signup() {
                                         disabled={isLoading}
                                         required
                                         placeholder="Enter your email address"
-                                        className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 disabled:opacity-60 disabled:cursor-not-allowed"
+                                        className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
                                     />
                                 </div>
                             </div>
@@ -209,13 +200,13 @@ function Signup() {
                                         disabled={isLoading}
                                         required
                                         placeholder="Enter your password"
-                                        className="w-full border border-gray-300 rounded-lg pl-10 pr-10 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 disabled:opacity-60 disabled:cursor-not-allowed"
+                                        className="w-full border border-gray-300 rounded-lg pl-10 pr-10 py-2 focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
                                     />
                                     <button
                                         type="button"
                                         onClick={handleClickShowPassword}
                                         disabled={isLoading}
-                                        className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 disabled:opacity-60"
+                                        className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
                                     >
                                         <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                                     </button>
@@ -226,20 +217,8 @@ function Signup() {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full py-2 rounded-lg font-semibold text-white transition-all shadow-md hover:shadow-lg transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
-                                style={{ 
-                                    backgroundColor: '#ff3f7a'
-                                }}
-                                onMouseEnter={(e) => {
-                                    if (!isLoading) {
-                                        e.target.style.backgroundColor = '#e6356d';
-                                    }
-                                }}
-                                onMouseLeave={(e) => {
-                                    if (!isLoading) {
-                                        e.target.style.backgroundColor = '#ff3f7a';
-                                    }
-                                }}
+                                className="w-full py-2 rounded-lg font-semibold text-white transition-all shadow-md hover:shadow-lg transform hover:scale-105 disabled:opacity-70"
+                                style={{ backgroundColor: '#ff3f7a' }}
                             >
                                 {isLoading ? (
                                     <span className="flex items-center justify-center space-x-2">
@@ -249,19 +228,13 @@ function Signup() {
                                         </svg>
                                         <span>Creating account...</span>
                                     </span>
-                                ) : (
-                                    'Sign Up'
-                                )}
+                                ) : 'Sign Up'}
                             </button>
                         </form>
 
                         <p className="text-center text-sm text-gray-600">
                             Already have an account?{" "}
-                            <Link 
-                                to="/login" 
-                                className="font-semibold hover:underline transition-colors"
-                                style={{ color: '#ff3f7a' }}
-                            >
+                            <Link to="/login" className="font-semibold hover:underline transition-colors" style={{ color: '#ff3f7a' }}>
                                 Login
                             </Link>
                         </p>
@@ -273,3 +246,4 @@ function Signup() {
 }
 
 export default Signup;
+      
