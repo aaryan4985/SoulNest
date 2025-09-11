@@ -42,8 +42,8 @@ export class LanguageManager {
     const targetHash = `#googtrans(en|${langCode})`;
     // Always set the googtrans hash (including English) to make Google Translate reflect change immediately
     // For English, clearing the hash often resets properly
-    if (langCode === 'en') {
-      window.location.hash = '';
+    if (langCode === "en") {
+      window.location.hash = "";
     } else {
       window.location.hash = targetHash;
     }
@@ -97,12 +97,12 @@ export class LanguageManager {
         tries++;
         try {
           // The select may be injected as .goog-te-combo
-          const select = document.querySelector('.goog-te-combo');
+          const select = document.querySelector(".goog-te-combo");
           if (select) {
             // Try to set by value; some implementations use language codes, others short codes
             select.value = langCode;
-            const ev = document.createEvent('HTMLEvents');
-            ev.initEvent('change', true, true);
+            const ev = document.createEvent("HTMLEvents");
+            ev.initEvent("change", true, true);
             select.dispatchEvent(ev);
             // Resolve after short delay to allow widget to apply
             setTimeout(() => resolve(true), 300);
@@ -110,21 +110,34 @@ export class LanguageManager {
           }
 
           // Some implementations render a menu in an iframe; try to open menu and click the language element
-          const menuFrame = document.querySelector('iframe.goog-te-menu-frame');
+          const menuFrame = document.querySelector("iframe.goog-te-menu-frame");
           if (menuFrame && menuFrame.contentWindow) {
             try {
               const doc = menuFrame.contentWindow.document;
-              const items = doc.querySelectorAll('.goog-te-menu2-item, .goog-te-menu2');
+              const items = doc.querySelectorAll(
+                ".goog-te-menu2-item, .goog-te-menu2"
+              );
               for (let item of items) {
                 // Match by data-lang or value attributes when available
-                const dataLang = item.getAttribute('data-lang') || item.getAttribute('value') || item.getAttribute('lang');
-                if (dataLang && dataLang.toLowerCase() === langCode.toLowerCase()) {
+                const dataLang =
+                  item.getAttribute("data-lang") ||
+                  item.getAttribute("value") ||
+                  item.getAttribute("lang");
+                if (
+                  dataLang &&
+                  dataLang.toLowerCase() === langCode.toLowerCase()
+                ) {
                   item.click();
                   setTimeout(() => resolve(true), 300);
                   return;
                 }
                 // Fallback: match innerText (language name) contains code or vice-versa
-                if (item.innerText && item.innerText.toLowerCase().indexOf(langCode.toLowerCase()) !== -1) {
+                if (
+                  item.innerText &&
+                  item.innerText
+                    .toLowerCase()
+                    .indexOf(langCode.toLowerCase()) !== -1
+                ) {
                   item.click();
                   setTimeout(() => resolve(true), 300);
                   return;

@@ -124,7 +124,7 @@ export default function HappinessDashboard() {
         {/* Speed Dial Button */}
         <button
           onClick={() => navigate('/emergency')}
-          className="absolute left-0 bg-[#ff3f74] hover:bg-[#e73568] text-white font-semibold px-4 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105"
+          className="absolute left-10 bg-[#ff3f74] hover:bg-[#e73568] text-white font-semibold px-4 py-3 rounded-lg shadow-lg transition-all duration-200 transform hover:scale-105"
           title="Speed Dial - Emergency Contacts"
         >
           <span className="text-lg"></span>
@@ -143,7 +143,7 @@ export default function HappinessDashboard() {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          Take Survey
+          Get in Touch
         </button>
       </div>
 
