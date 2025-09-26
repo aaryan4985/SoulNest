@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export const useStore = create((set, get) => ({
-  // Auth
+  // Auth // check personal
   user: null,
   setUser: (user) => set({ user }),
 

@@ -1,5 +1,9 @@
 // Utility functions for notifications and error handling
 
+import { onAuthStateChanged } from "firebase/auth";
+import { useStore } from "./store/userStore";
+import { auth } from "./config/firebase";
+
 export function handleError(error) {
   if (typeof error === "string") {
     alert(error);
@@ -12,4 +16,16 @@ export function handleError(error) {
 
 export function handleSuccess(message) {
   alert(message);
+}
+
+
+export const initAuthListener = () => {
+  const {setUser} = useStore.getState();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user);
+    }  else {
+      setUser(null);
+    }
+  });
 }

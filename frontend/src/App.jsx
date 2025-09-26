@@ -31,6 +31,7 @@ import ClientChat from "./pages/ClientChat";
 import NewsPage from "./pages/NewsPage";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import EmergencyButtons from "./pages/EmergencyButtons";
+import { initAuthListener } from "./utils";
 
 function App() {
   const location = useLocation();
@@ -47,6 +48,10 @@ function App() {
       setIsTransitioning(false);
     }, 800);
   };
+  
+  useEffect(() => {
+    initAuthListener();
+  }, []);  
 
   return (
     <div className="relative">
